@@ -1,10 +1,9 @@
-import React from "react";
 import { H2 } from "@/components/typography/h2";
 import P from "@/components/typography/p";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 const ContactSection = () => {
   return (

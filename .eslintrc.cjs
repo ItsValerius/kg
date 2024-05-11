@@ -4,6 +4,7 @@ const config = {
   "parserOptions": {
     "project": true
   },
+  'ignorePatterns':"**/components/ui/*.tsx",
   "plugins": [
     "@typescript-eslint",
     "drizzle"

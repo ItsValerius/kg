@@ -1,21 +1,20 @@
-import { cn } from "@/lib/utils";
-import { EditorBubbleItem, useEditor } from "novel";
+import { Separator } from "@/components/ui/separator";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   BoldIcon,
-  ItalicIcon,
-  UnderlineIcon,
-  StrikethroughIcon,
   CheckSquare,
   Heading1,
   Heading2,
   Heading3,
+  ItalicIcon,
   ListOrdered,
+  StrikethroughIcon,
   TextIcon,
   TextQuote,
+  UnderlineIcon,
 } from "lucide-react";
+import { useEditor } from "novel";
 import type { SelectorItem } from "./node-selector";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Separator } from "@/components/ui/separator";
 
 export const TextButtonsBar = () => {
   const { editor } = useEditor();

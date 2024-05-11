@@ -1,30 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
 import {
   File,
-  Home,
-  LineChart,
   ListFilter,
   MoreHorizontal,
-  Package,
-  Package2,
-  PanelLeft,
-  PlusCircle,
-  Search,
-  Settings,
-  ShoppingCart,
-  Users2,
+  PlusCircle
 } from "lucide-react";
+import Image from "next/image";
 
 import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -43,8 +25,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -55,23 +35,17 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogDescription,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
 
-import { Upload } from "./upload";
-import SideMenu from "./sideMenu";
 import DashboardHeader from "./dashboardHeader";
+import SideMenu from "./sideMenu";
+import { Upload } from "./upload";
 
 export function Dashboard() {
   return (

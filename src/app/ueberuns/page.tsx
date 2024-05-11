@@ -1,6 +1,5 @@
 import { H2 } from "@/components/typography/h2";
 import P from "@/components/typography/p";
-import React from "react";
 
 const UeberunsPage = () => {
   return (

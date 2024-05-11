@@ -1,8 +1,7 @@
-import Header from "@/components/homepage/header";
-import HeroSection from "@/components/homepage/heroSection";
-import EventsSection from "@/components/homepage/eventsSection";
-import UeberunsSection from "@/components/homepage/ueberunsSection";
 import ContactSection from "@/components/homepage/contactSection";
+import EventsSection from "@/components/homepage/eventsSection";
+import HeroSection from "@/components/homepage/heroSection";
+import UeberunsSection from "@/components/homepage/ueberunsSection";
 
 export default function Home() {
   return (

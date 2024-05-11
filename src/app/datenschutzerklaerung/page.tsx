@@ -1,6 +1,5 @@
 import { H1 } from "@/components/typography/h1";
 import { H2 } from "@/components/typography/h2";
-import React from "react";
 
 const DatenschutzerklärungPage = () => {
   return (

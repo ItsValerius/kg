@@ -1,32 +1,24 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ChevronRightCircle, MountainIcon, SearchIcon } from "lucide-react";
-import Link from "next/link";
-import React from "react";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import LinkWithUnderline from "@/components/Links/LinkWithUnderline";
-import Small from "@/components/typography/small";
-import { db } from "@/server/db";
-import {
-  categoriesTable,
-  categoriesToPostsTable,
-  postsTable,
-  usersTable,
-} from "@/server/db/schema";
-import H3 from "@/components/typography/h3";
-import P from "@/components/typography/p";
 import { H1 } from "@/components/typography/h1";
+import H3 from "@/components/typography/h3";
 import Muted from "@/components/typography/muted";
+import P from "@/components/typography/p";
+import Small from "@/components/typography/small";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { createSlug } from "@/lib/utils";
+import { db } from "@/server/db";
+import { ChevronRightCircle, SearchIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const AktuellesPage = async () => {
   // await db

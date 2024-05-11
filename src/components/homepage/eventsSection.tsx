@@ -1,11 +1,9 @@
-import { CalendarDaysIcon, ChevronRightCircle } from "lucide-react";
-import React from "react";
 import H3 from "@/components/typography/h3";
 import P from "@/components/typography/p";
 import { Card, CardContent } from "@/components/ui/card";
+import { CalendarDaysIcon, ChevronRightCircle } from "lucide-react";
 import LinkWithIcon from "../Links/LinkWithIcon";
 import LinkWithUnderline from "../Links/LinkWithUnderline";
-import H4 from "../typography/h4";
 import Small from "../typography/small";
 const EventsSection = () => {
   return (

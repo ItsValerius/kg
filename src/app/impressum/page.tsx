@@ -2,7 +2,6 @@ import LinkWithUnderline from "@/components/Links/LinkWithUnderline";
 import H4 from "@/components/typography/h4";
 import P from "@/components/typography/p";
 import Small from "@/components/typography/small";
-import React from "react";
 
 const ImpressumPage = () => {
   return (

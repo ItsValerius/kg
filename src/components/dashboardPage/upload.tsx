@@ -1,26 +1,24 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { z } from "zod";
 import {
-  FormControl,
+  Form, FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { JSONContent } from "novel";
 import Editor from "@/components/editor/Editor";
-import { useState } from "react";
 import { defaultValue } from "@/components/editor/defaultValue";
+import { JSONContent } from "novel";
+import { useState } from "react";
 
 import { generateHTML } from "@tiptap/html";
-import React from "react";
 import { StarterKit } from "novel/extensions";
 
 const ACCEPTED_IMAGE_TYPES = [

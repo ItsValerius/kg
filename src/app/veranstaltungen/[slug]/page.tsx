@@ -6,8 +6,7 @@ import Muted from "@/components/typography/muted";
 import P from "@/components/typography/p";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, Clock, EuroIcon, LocateIcon } from "lucide-react";
-import React from "react";
+import { Calendar, Clock, EuroIcon } from "lucide-react";
 
 const EventDetailPage = () => {
   return (

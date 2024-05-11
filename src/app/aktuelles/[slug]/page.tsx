@@ -1,13 +1,19 @@
-import { db } from "@/server/db";
-import React from "react";
-import { eq } from "drizzle-orm";
-import { postsTable } from "@/server/db/schema";
-import { notFound } from "next/navigation";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { H1 } from "@/components/typography/h1";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { db } from "@/server/db";
+import { postsTable } from "@/server/db/schema";
+import { eq } from "drizzle-orm";
 import { serialize } from "next-mdx-remote/serialize";
+import { notFound } from "next/navigation";
 
+
+export async function generateStaticParams() {
+  const posts = await db.query.postsTable.findMany();
+ 
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
 
 const AktuellesDetailsPage = async ({
   params,

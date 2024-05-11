@@ -1,15 +1,13 @@
 import {
+  Calendar,
   Home,
-  LineChart,
-  Package,
-  Package2,
+  Newspaper,
   PanelLeft,
   Search,
-  ShoppingCart,
-  Users2,
+  Settings
 } from "lucide-react";
-import React from "react";
-import { SheetContent, SheetTrigger,Sheet } from "../ui/sheet";
+import Image from "next/image";
+import Link from "next/link";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,18 +16,17 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../ui/breadcrumb";
-import Link from "next/link";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import Image from "next/image";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const DashboardHeader = () => {
   return (
@@ -45,10 +42,15 @@ const DashboardHeader = () => {
           <nav className="grid gap-6 text-lg font-medium">
             <Link
               href="#"
-              className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+              className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full  text-lg font-semibold text-primary-foreground md:text-base"
             >
-              <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-              <span className="sr-only">Acme Inc</span>
+              <Image
+                src="https://knallkoepp-golkrath.de/s/misc/logo.png"
+                width={40}
+                height={40}
+                alt="logo"
+              />
+              <span className="sr-only">Knallköpp Golkrath</span>
             </Link>
             <Link
               href="#"
@@ -61,28 +63,21 @@ const DashboardHeader = () => {
               href="#"
               className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
             >
-              <ShoppingCart className="h-5 w-5" />
-              Orders
+              <Calendar className="h-5 w-5" />
+              Events
             </Link>
             <Link
               href="#"
               className="flex items-center gap-4 px-2.5 text-foreground"
             >
-              <Package className="h-5 w-5" />
-              Products
+              <Newspaper className="h-5 w-5" />
+              News
             </Link>
             <Link
               href="#"
               className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
             >
-              <Users2 className="h-5 w-5" />
-              Customers
-            </Link>
-            <Link
-              href="#"
-              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-            >
-              <LineChart className="h-5 w-5" />
+              <Settings className="h-5 w-5" />
               Settings
             </Link>
           </nav>

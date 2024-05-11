@@ -1,9 +1,8 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import {
-  index,
   integer,
   pgTable,
   pgTableCreator,
@@ -11,7 +10,6 @@ import {
   serial,
   text,
   timestamp,
-  varchar,
 } from "drizzle-orm/pg-core";
 
 /**
@@ -50,9 +48,9 @@ export const usersRelations = relations(usersTable, ({ many }) => ({
 
 export const postsRelations = relations(postsTable, ({ many, one }) => ({
   categoriesToPosts: many(categoriesToPostsTable),
-  author: one(usersTable,{
-    fields:[postsTable.userId],
-    references:[usersTable.id]
+  author: one(usersTable, {
+    fields: [postsTable.userId],
+    references: [usersTable.id],
   }),
 }));
 

@@ -1,7 +1,6 @@
 import { createClient } from "@/server/supabase/server";
 import { redirect } from "next/navigation";
 
-import { Upload } from "../../components/dashboardPage/upload";
 import { Dashboard } from "@/components/dashboardPage/dashboard";
 
 export default async function DashboardPage() {
@@ -16,9 +15,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <main className="">
-{/* 
-      <Upload /> */}
+    <main >
       <Dashboard />
     </main>
   );

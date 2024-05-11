@@ -1,14 +1,14 @@
 import {
-    TiptapImage,
-    TiptapLink,
-    UpdatedImage,
-    TaskList,
-    TaskItem,
-    HorizontalRule,
-    StarterKit,
-    Placeholder,
-  } from "novel/extensions";
-  import { UploadImagesPlugin } from "novel/plugins";
+  HorizontalRule,
+  Placeholder,
+  StarterKit,
+  TaskItem,
+  TaskList,
+  TiptapImage,
+  TiptapLink,
+  UpdatedImage,
+} from "novel/extensions";
+import { UploadImagesPlugin } from "novel/plugins";
   
   import { cx } from "class-variance-authority";
   

@@ -1,27 +1,27 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import {
-  EditorRoot,
-  EditorCommand,
-  EditorCommandItem,
-  EditorCommandEmpty,
-  EditorContent,
-  type JSONContent,
-  EditorCommandList,
   EditorBubble,
+  EditorCommand,
+  EditorCommandEmpty,
+  EditorCommandItem,
+  EditorCommandList,
+  EditorContent,
+  EditorRoot,
+  type JSONContent,
 } from "novel";
 import { ImageResizer, handleCommandNavigation } from "novel/extensions";
+import { useState } from "react";
 import { defaultExtensions } from "./extensions";
-import { NodeSelector } from "./selectors/node-selector";
-import { LinkSelector } from "./selectors/link-selector";
 import { ColorSelector } from "./selectors/color-selector";
+import { LinkSelector } from "./selectors/link-selector";
+import { NodeSelector } from "./selectors/node-selector";
 
-import { TextButtons } from "./selectors/text-buttons";
-import { slashCommand, suggestionItems } from "./slash-command";
+import { Separator } from "@/components/ui/separator";
 import { handleImageDrop, handleImagePaste } from "novel/plugins";
 import { uploadFn } from "./image-upload";
-import { Separator } from "@/components/ui/separator";
+import { TextButtons } from "./selectors/text-buttons";
 import { TextButtonsBar } from "./selectors/text-buttons-bar";
+import { slashCommand, suggestionItems } from "./slash-command";
 
 const extensions = [...defaultExtensions, slashCommand];
 

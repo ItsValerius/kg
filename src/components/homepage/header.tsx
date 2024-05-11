@@ -1,9 +1,8 @@
-import Link from "next/link";
-import React from "react";
 import LinkWithUnderline from "@/components/Links/LinkWithUnderline";
 import { Button } from "@/components/ui/button";
-import { Calendar, Contact, Contact2, Home, MenuIcon, Newspaper, Users2 } from "lucide-react";
+import { Calendar, Contact2, Home, MenuIcon, Newspaper, Users2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const Header = () => {

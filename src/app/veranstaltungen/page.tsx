@@ -1,10 +1,8 @@
 import LinkWithIcon from "@/components/Links/LinkWithIcon";
-import Header from "@/components/homepage/header";
 import H3 from "@/components/typography/h3";
 import P from "@/components/typography/p";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalendarDaysIcon, ChevronRightCircle } from "lucide-react";
-import React from "react";
 
 const VeranstaltungenPage = () => {
   return (
