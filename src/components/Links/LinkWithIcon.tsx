@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { LucideProps } from "lucide-react";
+import { type LucideProps } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 const LinkWithIcon = ({
@@ -20,7 +20,7 @@ const LinkWithIcon = ({
   return (
     <Link href={href} className={cn("flex gap-1 items-center justify-center", className)}>
       {children}
-      <Icon className={cn("stroke-emerald-600", iconClassName)} />
+      <Icon className={cn("", iconClassName)} />
     </Link>
   );
 };

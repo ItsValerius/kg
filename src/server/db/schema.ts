@@ -30,7 +30,6 @@ export const postsTable = pgTable("posts_table", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   slug: text("slug").notNull().unique(),
-  // image: text("image").notNull(),
   teaser: text("teaser").notNull(),
   content: text("content").notNull(),
   userId: integer("user_id")
@@ -92,9 +91,25 @@ export const categoriesToPostsRelations = relations(
   }),
 );
 
+export const eventsTable = pgTable("events_table", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  date: timestamp("date").notNull(),
+  slug: text("slug").notNull().unique(),
+  teaser: text("teaser").notNull(),
+  price: integer("price").notNull().default(0),
+  description: text("description").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .$onUpdate(() => new Date()),
+});
+
 export type InsertUser = typeof usersTable.$inferInsert;
 export type SelectUser = typeof usersTable.$inferSelect;
 export type InsertPost = typeof postsTable.$inferInsert;
 export type SelectPost = typeof postsTable.$inferSelect;
 export type InsertCategory = typeof categoriesTable.$inferInsert;
 export type SelectCategory = typeof categoriesTable.$inferSelect;
+export type InsertEvent = typeof eventsTable.$inferInsert;
+export type SelectEvent = typeof eventsTable.$inferSelect;

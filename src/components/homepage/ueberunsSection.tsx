@@ -1,5 +1,6 @@
 import { H2 } from "@/components/typography/h2";
 import P from "@/components/typography/p";
+import Image from "next/image";
 
 const UeberunsSection = () => {
   return (
@@ -14,11 +15,11 @@ const UeberunsSection = () => {
         </div>
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
-            <img
+            <Image
               alt="Club History"
               className="rounded-lg aspect-[600/400] object-cover "
               height="400"
-              src="https://www.knallkoepp-golkrath.de/s/img/emotionheader.jpg?1612271409.960px.300px"
+              src="https://knallkoepp-golkrath.de/s/img/emotionheader.jpg"
               width="600"
             />
           </div>

@@ -1,7 +1,10 @@
+import DashboardTable from "@/components/dashboardPage/dashboardTable";
+import DashboardTabs from "@/components/dashboardPage/dashboardTabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { db } from "@/server/db";
 import { createClient } from "@/server/supabase/server";
+import { TabsContent } from "@radix-ui/react-tabs";
 import { redirect } from "next/navigation";
-
-import { Dashboard } from "@/components/dashboardPage/dashboard";
 
 export default async function DashboardPage() {
   const supabase = createClient();
@@ -14,9 +17,19 @@ export default async function DashboardPage() {
     return redirect("/login");
   }
 
+  const posts =  db.query.postsTable.findMany();
+
   return (
-    <main >
-      <Dashboard />
+    <main>
+      <div className="p-4">
+        <div className="hidden md:grid md:grid-cols-2 md:gap-2">
+          <DashboardTable />
+          <DashboardTable />
+        </div>
+        <div className="md:hidden">
+          <DashboardTabs />
+        </div>
+      </div>
     </main>
   );
 }

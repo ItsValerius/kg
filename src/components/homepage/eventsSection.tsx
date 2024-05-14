@@ -28,7 +28,7 @@ const EventsSection = () => {
                   <CalendarDaysIcon className="h-5 w-5 stroke-emerald-600" />
                   <span className="text-sm">25. Februar 2023</span>
                 </div>
-                <LinkWithIcon href="#" Icon={ChevronRightCircle} />
+                <LinkWithIcon href="#" Icon={ChevronRightCircle} iconClassName="stroke-emerald-600" />
               </div>
             </CardContent>
           </Card>
@@ -44,7 +44,7 @@ const EventsSection = () => {
                   <CalendarDaysIcon className="h-5 w-5 stroke-emerald-600" />
                   <span className="text-sm">11. März 2023</span>
                 </div>
-                <LinkWithIcon href="#" Icon={ChevronRightCircle} />
+                <LinkWithIcon href="#" Icon={ChevronRightCircle} iconClassName="stroke-emerald-600" />
               </div>
             </CardContent>
           </Card>
@@ -60,7 +60,7 @@ const EventsSection = () => {
                   <CalendarDaysIcon className="h-5 w-5 stroke-emerald-600" />
                   <span className="text-sm">20. Februar 2023</span>
                 </div>
-                <LinkWithIcon href="#" Icon={ChevronRightCircle} />
+                <LinkWithIcon href="#" Icon={ChevronRightCircle} iconClassName="stroke-emerald-600" />
               </div>
             </CardContent>
           </Card>

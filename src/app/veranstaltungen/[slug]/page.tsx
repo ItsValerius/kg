@@ -1,51 +1,103 @@
+import LinkWithUnderline from "@/components/Links/LinkWithUnderline";
 import { H1 } from "@/components/typography/h1";
-import H3 from "@/components/typography/h3";
 import H4 from "@/components/typography/h4";
-import List from "@/components/typography/list";
 import Muted from "@/components/typography/muted";
-import P from "@/components/typography/p";
-import { Card, CardContent } from "@/components/ui/card";
+import Small from "@/components/typography/small";
+import {
+  Card,
+  CardContent
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, Clock, EuroIcon } from "lucide-react";
+import { db } from "@/server/db";
+import { eventsTable } from "@/server/db/schema";
+import { eq } from "drizzle-orm";
+import {
+  Calendar,
+  ChevronLeftCircle,
+  Clock,
+  EuroIcon
+} from "lucide-react";
+import { notFound } from "next/navigation";
 
-const EventDetailPage = () => {
+const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
+  const event = await db.query.eventsTable.findFirst({
+    where: eq(eventsTable.slug, params.slug),
+  });
+
+  if (!event) return notFound();
+
   return (
     <main className=" flex flex-col gap-4 py-4">
-      <section className="py-12 px-4 md:px-6">
-        <div className="max-w-5xl mx-auto space-y-8">
-          <H4 className="text-center from-emerald-700 to-lime-200 bg-clip-text text-transparent bg-gradient-to-r">
-            25. Februar 2023
+      <div className="p-4 absolute">
+        <LinkWithUnderline
+          href="/veranstaltungen"
+          spanClassName=" flex items-center gap-1 pb-1"
+        >
+          <ChevronLeftCircle size={16} className="stroke-emerald-600" />
+          <Small>Alle Veranstaltungen</Small>
+        </LinkWithUnderline>
+      </div>
+      <section className="px-4 py-12 md:px-6">
+        <div className="mx-auto max-w-5xl space-y-8">
+          <H4 className="bg-gradient-to-r from-emerald-700 to-lime-200 bg-clip-text text-center text-transparent">
+            {new Intl.DateTimeFormat("de-DE", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            }).format(event.date)}
           </H4>
-          <H1 className="text-center text-balance">
-            Kostümball - Feiern Sie den Höhepunkt der Karnevalssaison!
-          </H1>
-          <div className="grid md:grid-cols-3 gap-4">
-            <Card className="p-4 hover:shadow-lg duration-500 hover:shadow-emerald-600/60">
+          <H1 className="text-balance text-center">{event.name}</H1>
+          <div className="grid gap-4 md:grid-cols-3">
+            <Card className="p-4 duration-500 hover:shadow-lg hover:shadow-emerald-600/60">
               <CardContent className="flex flex-col items-center gap-8">
                 <Calendar className="stroke-emerald-600" size={48} />
                 <div className="flex flex-col gap-2">
                   <Muted className="text-center ">Am</Muted>
-                  <H4 className="text-center">25. Februar 2023</H4>
-                  <Muted className="text-center "> Donnerstag</Muted>
+                  <H4 className="text-center">
+                    {" "}
+                    {new Intl.DateTimeFormat("de-DE", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }).format(event.date)}
+                  </H4>
+                  <Muted className="text-center ">
+                    {" "}
+                    {new Intl.DateTimeFormat("de-DE", {
+                      weekday: "long",
+                    }).format(event.date)}
+                  </Muted>
                 </div>
               </CardContent>
             </Card>
-            <Card className="p-4 hover:shadow-lg duration-500 hover:shadow-emerald-600/60">
+            <Card className="p-4 duration-500 hover:shadow-lg hover:shadow-emerald-600/60">
               <CardContent className="flex flex-col items-center gap-8">
                 <Clock className="stroke-emerald-600" size={48} />
                 <div className="flex flex-col gap-2">
                   <Muted className="text-center ">Ab</Muted>
-                  <H4 className="text-center">19:00 Uhr</H4>
+                  <H4 className="text-center">
+                    {" "}
+                    {new Intl.DateTimeFormat("de-DE", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }).format(event.date)}
+                  </H4>
                   <Muted className="text-center ">Einlass</Muted>
                 </div>
               </CardContent>
             </Card>
-            <Card className="p-4 hover:shadow-lg duration-500 hover:shadow-emerald-600/60">
+            <Card className="p-4 duration-500 hover:shadow-lg hover:shadow-emerald-600/60">
               <CardContent className="flex flex-col items-center gap-8">
                 <EuroIcon className="stroke-emerald-600" size={48} />
                 <div className="flex flex-col gap-2">
                   <Muted className="text-center">Preis</Muted>
-                  <H4 className="text-center">5€</H4>
+                  <H4 className="text-center">
+                    {new Intl.NumberFormat("de-DE", {
+                      style: "currency",
+                      currency: "EUR",
+                      notation: "compact",
+                    }).format(event.price / 100)}
+                  </H4>
                   <Muted className="text-center ">/ Person</Muted>
                 </div>
               </CardContent>
@@ -53,51 +105,13 @@ const EventDetailPage = () => {
           </div>
         </div>
       </section>
-      <Separator className="my-4 max-w-5xl mx-auto" />
-      <section className="py-6 px-2 md:px-4">
-        <div className="max-w-3xl mx-auto space-y-6">
-          <H3>Besondere Acts und Highlights:</H3>
-          <List className="mt-2">
-            <li>Live-Auftritte von renommierten Karnevalsgruppen und Bands</li>
-            <li>
-              Spektakuläre Kostümwettbewerbe mit tollen Preisen für die
-              kreativsten Verkleidungen
-            </li>
-            <li>
-              Aufregende Tanzvorführungen und Mitmachaktionen für alle Gäste
-            </li>
-            <li>
-              Überraschungsgäste und Special Performances im Laufe des Abends -
-            </li>
-            <li>
-              Exklusive Fotoecke, um Ihre fantastischen Kostüme festzuhalten und
-              Erinnerungen zu schaffen
-            </li>
-          </List>
-          <Separator className="my-4 max-w-3xl mx-auto" />
-          <H3>Veranstaltungsbeschreibung:</H3>
-          Treten Sie ein in eine Welt voller Farben, Musik und Frohsinn und
-          lassen Sie sich vom Flair des Karnevals verzaubern! Unser Kostümball
-          verspricht eine unvergessliche Nacht voller Spaß und Unterhaltung.
-          Tauchen Sie ein in unsere festlich geschmückte Location und erleben
-          Sie die einzigartige Atmosphäre des Karnevals. Ob traditionell,
-          originell oder extravagant - zeigen Sie Ihre besten Kostüme und feiern
-          Sie mit uns bis in die frühen Morgenstunden!
-          <Separator className="my-4 max-w-3xl mx-auto" />
-          <H3>Anfahrt und Lage:</H3>
-          Der Karnevalssaal "Festlicher Rausch" befindet sich in zentraler Lage
-          in Köln und ist sowohl mit öffentlichen Verkehrsmitteln als auch mit
-          dem Auto bequem zu erreichen. Kostenlose Parkplätze stehen in der Nähe
-          zur Verfügung.
-          <Separator className="my-4 max-w-3xl mx-auto" />
-          <P>
-            Sichern Sie sich noch heute Ihre Tickets für dieses spektakuläre
-            Ereignis und seien Sie dabei, wenn wir den Höhepunkt der
-            Karnevalssaison gebührend feiern! Wir freuen uns darauf, Sie auf
-            unserem Kostümball begrüßen zu dürfen! Für weitere Informationen und
-            Ticketbuchungen besuchen Sie bitte unsere Website oder kontaktieren
-            Sie uns unter [Kontaktinformationen].
-          </P>
+      <Separator className="mx-auto my-4 max-w-5xl" />
+      <section className="px-2 py-6 md:px-4">
+        <div className="mx-auto flex max-w-5xl justify-center">
+          <CardContent
+            dangerouslySetInnerHTML={{ __html: event.description }}
+            className="prose"
+          ></CardContent>
         </div>
       </section>
     </main>

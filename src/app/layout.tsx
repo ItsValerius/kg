@@ -18,7 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + " min-h-screen overflow-y-scroll flex flex-col justify-between"}>
+      <body
+        className={
+          inter.className +
+          " grid min-h-screen grid-rows-[64px_1fr_64px] overflow-y-scroll"
+        }
+      >
         <Header />
         {children}
         <Footer />

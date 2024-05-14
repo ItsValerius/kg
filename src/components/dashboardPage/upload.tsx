@@ -1,12 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import {
-  Form, FormControl,
+  Form,
+  FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +16,7 @@ import { z } from "zod";
 
 import Editor from "@/components/editor/Editor";
 import { defaultValue } from "@/components/editor/defaultValue";
-import { JSONContent } from "novel";
+import { type JSONContent } from "novel";
 import { useState } from "react";
 
 import { generateHTML } from "@tiptap/html";
@@ -63,7 +64,7 @@ export const Upload = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     const { title, content, teaser } = values;
-    console.log(values);
+    console.log({ title, content, teaser });
     // const formData = new FormData();
     // formData.append("file", values.file);
     // await uploadImage(formData);
@@ -77,9 +78,11 @@ export const Upload = () => {
         <form
           onSubmit={(e) => {
             form.setValue("content", generateHTML(content, [StarterKit]));
-            form.handleSubmit(onSubmit)(e);
+            form
+              .handleSubmit(onSubmit)(e)
+              .catch((err) => console.log(err));
           }}
-          className="flex gap-2 lg:pb-4 pb-2 flex-col lg:flex-row"
+          className="flex flex-col gap-2 pb-2 lg:flex-row lg:pb-4"
           id="articleForm"
         >
           <FormField
@@ -126,9 +129,7 @@ export const Upload = () => {
                     type="file"
                     placeholder="shadcn"
                     {...field}
-                    onChange={(event) =>
-                      onChange(event.target.files && event.target.files[0])
-                    }
+                    onChange={(event) => onChange(event.target?.files?.[0])}
                   />
                 </FormControl>
                 <FormDescription>
