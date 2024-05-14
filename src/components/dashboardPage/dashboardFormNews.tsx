@@ -1,0 +1,149 @@
+"use client";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import Editor from "@/components/editor/Editor";
+import { defaultValue } from "@/components/editor/defaultValue";
+import { type JSONContent } from "novel";
+import { useState } from "react";
+
+import { generateHTML } from "@tiptap/html";
+import { StarterKit } from "novel/extensions";
+import { Textarea } from "../ui/textarea";
+
+import { ACCEPTED_IMAGE_TYPES, newsSchema } from "@/lib/z/schema";
+import { insertPostSchema } from "@/server/db/schema";
+
+const MAX_FILE_SIZE = 5000000;
+
+export const DashboardFormNews = () => {
+  const fileSchema = z.object({
+    file: z
+      .instanceof(File)
+      .refine(
+        (file) => file.size <= MAX_FILE_SIZE,
+        `File size should be less than 5mb.`,
+      )
+      .refine(
+        (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
+        "Only these types are allowed .jpg, .jpeg, .png and .webp",
+      ),
+  });
+  const formSchema = insertPostSchema.merge(fileSchema);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+      teaser: "",
+    },
+  });
+
+  // 2. Define a submit handler.
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    const { title, content, teaser } = values;
+    console.log({ title, content, teaser });
+    // const formData = new FormData();
+    // formData.append("file", values.file);
+    // await uploadImage(formData);
+  }
+
+
+
+  const [content, setContent] = useState<JSONContent>(defaultValue);
+
+  return (
+    <div className="flex flex-col gap-2 overflow-x-scroll lg:overflow-auto">
+      <Form {...form}>
+        <form
+          onSubmit={(e) => {
+            form.setValue("content", generateHTML(content, [StarterKit]));
+            form
+              .handleSubmit(onSubmit)(e)
+              .catch((err) => console.log(err));
+          }}
+          className="flex flex-col gap-2 px-4 pb-2 md:flex-row lg:flex-row lg:pb-4"
+          id="dashboardForm"
+        >
+          <div className="flex flex-col gap-2">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Titel</FormLabel>
+                  <FormControl>
+                    <Input placeholder="shadcn" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="file"
+              render={({ field: { value, onChange, ...field } }) => (
+                <FormItem>
+                  <FormLabel>File</FormLabel>
+                  <FormControl>
+                    <Input
+                      accept={ACCEPTED_IMAGE_TYPES.join(", ")}
+                      type="file"
+                      placeholder="shadcn"
+                      {...field}
+                      onChange={(event) => onChange(event.target?.files?.[0])}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name="teaser"
+            render={({ field }) => (
+              <FormItem className="flex flex-col ">
+                <FormLabel>Teaser</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Tell us a little bit about yourself"
+                    className="flex-1"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  You can <span>@mention</span> other users and organizations.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </form>
+      </Form>
+      <Editor initialValue={content} onChange={setContent} />
+      <Button form="dashboardForm" type="submit">
+        Submit
+      </Button>
+    </div>
+  );
+};

@@ -11,7 +11,7 @@ import {
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
-
+import { createInsertSchema } from "drizzle-zod";
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
  * database instance for multiple projects.
@@ -113,3 +113,7 @@ export type InsertCategory = typeof categoriesTable.$inferInsert;
 export type SelectCategory = typeof categoriesTable.$inferSelect;
 export type InsertEvent = typeof eventsTable.$inferInsert;
 export type SelectEvent = typeof eventsTable.$inferSelect;
+
+export const insertUserSchema = createInsertSchema(usersTable);
+export const insertPostSchema = createInsertSchema(postsTable);
+export const insertEventSchema = createInsertSchema(eventsTable);
