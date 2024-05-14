@@ -4,8 +4,7 @@ import Small from "@/components/typography/small";
 import {
   Card,
   CardContent,
-  CardFooter,
-  CardHeader,
+  CardHeader
 } from "@/components/ui/card";
 import { db } from "@/server/db";
 import { postsTable } from "@/server/db/schema";

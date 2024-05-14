@@ -1,9 +1,7 @@
 import DashboardTable from "@/components/dashboardPage/dashboardTable";
 import DashboardTabs from "@/components/dashboardPage/dashboardTabs";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { db } from "@/server/db";
 import { createClient } from "@/server/supabase/server";
-import { TabsContent } from "@radix-ui/react-tabs";
 import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {

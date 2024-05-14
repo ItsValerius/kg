@@ -23,7 +23,6 @@ import { generateHTML } from "@tiptap/html";
 import { StarterKit } from "novel/extensions";
 import { Textarea } from "../ui/textarea";
 
-import { ACCEPTED_IMAGE_TYPES } from "@/lib/z/schema";
 import { insertEventSchema } from "@/server/db/schema";
 import { cn, createSlug } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";

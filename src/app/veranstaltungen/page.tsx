@@ -10,6 +10,7 @@ import { CalendarDaysIcon, ChevronRightCircle } from "lucide-react";
 const VeranstaltungenPage = async () => {
   const events = await db.query.eventsTable.findMany({
     where: gt(eventsTable.date, new Date()),
+    
   });
 
   return (
@@ -27,7 +28,7 @@ const VeranstaltungenPage = async () => {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {events.map((event) => {
               return (
-                <Card className="p-4 duration-500 hover:shadow-lg hover:shadow-emerald-600/60">
+                <Card className="p-4 duration-500 hover:shadow-lg hover:shadow-emerald-600/60" key={event.id}>
                   <CardContent className="grid h-full grid-rows-[32px_1fr_20px] gap-2 space-y-2">
                     <H3 className="text-xl font-bold">{event.name}</H3>
                     <P className="line-clamp-3 text-slate-700">

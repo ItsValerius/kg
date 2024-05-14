@@ -23,10 +23,10 @@ import { generateHTML } from "@tiptap/html";
 import { StarterKit } from "novel/extensions";
 import { Textarea } from "../ui/textarea";
 
-import { ACCEPTED_IMAGE_TYPES, newsSchema } from "@/lib/z/schema";
 import { insertPostSchema } from "@/server/db/schema";
 
 const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 export const DashboardFormNews = () => {
   const fileSchema = z.object({
