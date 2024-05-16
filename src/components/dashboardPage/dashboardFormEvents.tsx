@@ -30,7 +30,8 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { db } from "@/server/db";
 import { insertEvent } from "@/app/dashboard/actions";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 export const DashboardFormEvents = () => {
   const timeSchema = z.object({ time: z.string().time({ precision: 0 }) });
 
@@ -48,24 +49,22 @@ export const DashboardFormEvents = () => {
     // ✅ This will be type-safe and validated.
     console.log({ values });
     await insertEvent(values);
-    return redirect("/");
     // const formData = new FormData();
     // formData.append("file", values.file);
     // await uploadImage(formData);
   }
 
   const [content, setContent] = useState<JSONContent>(defaultValue);
-
+  const router = useRouter();
   return (
     <div className="flex flex-col gap-2 overflow-x-scroll lg:overflow-auto">
       <Form {...form}>
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             form.setValue("description", generateHTML(content, [StarterKit]));
             form.setValue("slug", createSlug(form.getValues("name")));
-            form
-              .handleSubmit(onSubmit)(e)
-              .catch((err) => console.log(err));
+            await form.handleSubmit(onSubmit)(e);
+            router.push("/dashboard/veranstaltungen/erstellt");
           }}
           className="flex flex-col gap-2 p-4 md:grid md:grid-cols-3 "
           id="dashboardForm"

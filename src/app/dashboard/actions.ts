@@ -3,6 +3,7 @@
 import { db } from "@/server/db";
 import { InsertEvent, eventsTable } from "@/server/db/schema";
 import { createClient } from "@/server/supabase/server";
+import { revalidatePath } from "next/cache";
 
 export const uploadImage = async (formData: FormData) => {
   const supabase = createClient();
@@ -38,11 +39,11 @@ export const uploadImage = async (formData: FormData) => {
 
 export const insertEvent = async (values: InsertEvent) => {
   console.log(values);
-  
+
   const { price } = values;
   let priceInCents = 0;
   if (price) priceInCents = price * 100;
-  return await db
-    .insert(eventsTable)
-    .values({ ...values, price: priceInCents });
+  await db.insert(eventsTable).values({ ...values, price: priceInCents });
+  revalidatePath("/veranstaltungen");
+  return;
 };
