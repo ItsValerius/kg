@@ -10,20 +10,10 @@ import {
 } from "../ui/dropdown-menu";
 import { ListFilter, PlusCircle, File } from "lucide-react";
 import { Button } from "../ui/button";
-import { Dialog, DialogContent } from "../ui/dialog";
-import { DialogTrigger } from "@radix-ui/react-dialog";
-import { DashboardFormNews } from "./dashboardFormNews";
-import { DashboardFormEvents } from "./dashboardFormEvents";
+
+import Link from "next/link";
 
 const DashboardDetailsHeader = ({ type }: { type: "events" | "news" }) => {
-  const DashboardForm = ({ type }: { type: "events" | "news" }) => {
-    switch (type) {
-      case "events":
-        return <DashboardFormEvents />;
-      case "news":
-        return <DashboardFormNews />;
-    }
-  };
   return (
     <div className="ml-auto flex items-center gap-2">
       <DropdownMenu>
@@ -49,19 +39,21 @@ const DashboardDetailsHeader = ({ type }: { type: "events" | "news" }) => {
           Export
         </span>
       </Button>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button size="sm" className="h-8 gap-1">
-            <PlusCircle className="h-3.5 w-3.5" />
-            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              {type === "events" ? 'Neue Veranstaltung' : 'Neue News'}
-            </span>
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="h-full max-w-5xl  p-2 ">
-          <DashboardForm type={type} />
-        </DialogContent>
-      </Dialog>
+
+      <Button asChild size="sm" className="h-8 gap-1">
+        <Link
+          href={
+            type === "events"
+              ? "/dashboard/veranstaltungen/add"
+              : "/dashboard/aktuelles/add"
+          }
+        >
+          <PlusCircle className="h-3.5 w-3.5" />
+          <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+            {type === "events" ? "Neue Veranstaltung" : "Neue News"}
+          </span>
+        </Link>
+      </Button>
     </div>
   );
 };

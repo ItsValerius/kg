@@ -13,11 +13,12 @@ import {
 
 const DashboardAside = () => {
   const pathname = usePathname();
+  console.log(pathname.includes("/dashboard/veranstaltungen"));
 
   return (
     <aside className="flex w-full flex-row justify-between border-b p-4 sm:w-14 sm:flex-col sm:border-r">
       <TooltipProvider>
-        <nav className="hidden flex-row gap-4 sm:flex-col sm:flex">
+        <nav className="hidden flex-row gap-4 sm:flex sm:flex-col">
           <Tooltip>
             <TooltipTrigger>
               <LinkWithIcon
@@ -36,7 +37,9 @@ const DashboardAside = () => {
                 href="/dashboard/aktuelles"
                 Icon={Newspaper}
                 iconClassName={cn("", {
-                  "stroke-emerald-500": pathname === "/dashboard/aktuelles",
+                  "stroke-emerald-500": pathname.includes(
+                    "/dashboard/aktuelles",
+                  ),
                 })}
               />
             </TooltipTrigger>
@@ -48,8 +51,9 @@ const DashboardAside = () => {
                 href="/dashboard/veranstaltungen"
                 Icon={Calendar}
                 iconClassName={cn("", {
-                  "stroke-emerald-500":
-                    pathname === "/dashboard/veranstaltungen",
+                  "stroke-emerald-500": pathname.includes(
+                    "/dashboard/veranstaltungen",
+                  ),
                 })}
               />
               <TooltipContent side="right">Veranstaltungen</TooltipContent>
@@ -69,7 +73,7 @@ const DashboardAside = () => {
             href="/dashboard/aktuelles"
             Icon={Newspaper}
             iconClassName={cn("", {
-              "stroke-emerald-500": pathname === "/dashboard/aktuelles",
+              "stroke-emerald-500": pathname.includes("/dashboard/aktuelles"),
             })}
           />
 
@@ -77,7 +81,9 @@ const DashboardAside = () => {
             href="/dashboard/veranstaltungen"
             Icon={Calendar}
             iconClassName={cn("", {
-              "stroke-emerald-500": pathname === "/dashboard/veranstaltungen",
+              "stroke-emerald-500": pathname.includes(
+                "/dashboard/veranstaltungen",
+              ),
             })}
           />
         </nav>

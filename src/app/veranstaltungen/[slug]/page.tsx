@@ -31,10 +31,10 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
       <div className="p-4 absolute">
         <LinkWithUnderline
           href="/veranstaltungen"
-          spanClassName=" flex items-center gap-1 pb-1"
+          spanClassName="flex items-center gap-1 pb-1 "
         >
           <ChevronLeftCircle size={16} className="stroke-emerald-600" />
-          <Small>Alle Veranstaltungen</Small>
+          <Small className="sm:text-lg">Alle Veranstaltungen</Small>
         </LinkWithUnderline>
       </div>
       <section className="px-4 py-12 md:px-6">
@@ -95,7 +95,7 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
                     {new Intl.NumberFormat("de-DE", {
                       style: "currency",
                       currency: "EUR",
-                      notation: "compact",
+                      notation: "standard",
                     }).format(event.price / 100)}
                   </H4>
                   <Muted className="text-center ">/ Person</Muted>

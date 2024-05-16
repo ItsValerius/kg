@@ -35,7 +35,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
   return (
     <EditorRoot>
       <EditorContent
-        className="rounded-xl border p-2 flex flex-col-reverse"
+        className="flex flex-col-reverse rounded-xl border p-2"
         {...(initialValue && { initialContent: initialValue })}
         extensions={extensions}
         editorProps={{
@@ -52,7 +52,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
         slotAfter={<ImageResizer />}
       >
         <TextButtonsBar />
-      
+
         <EditorCommand className="z-50 h-auto max-h-[330px] overflow-y-auto rounded-md border border-muted bg-background px-1 py-2 shadow-md transition-all">
           <EditorCommandEmpty className="px-2 text-muted-foreground">
             No results
@@ -79,7 +79,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
           </EditorCommandList>
         </EditorCommand>
 
-        <EditorBubble
+        {/* <EditorBubble
           tippyOptions={{
             placement: "top",
           }}
@@ -94,8 +94,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
           <TextButtons />
           <Separator orientation="vertical" />
           <ColorSelector open={openColor} onOpenChange={setOpenColor} />
-        </EditorBubble>
-
+        </EditorBubble> */}
       </EditorContent>
     </EditorRoot>
   );

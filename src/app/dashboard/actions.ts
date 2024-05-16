@@ -1,5 +1,7 @@
 "use server";
 
+import { db } from "@/server/db";
+import { InsertEvent, eventsTable } from "@/server/db/schema";
 import { createClient } from "@/server/supabase/server";
 
 export const uploadImage = async (formData: FormData) => {
@@ -32,4 +34,15 @@ export const uploadImage = async (formData: FormData) => {
   }
 
   console.log("File uploaded successfully!");
+};
+
+export const insertEvent = async (values: InsertEvent) => {
+  console.log(values);
+  
+  const { price } = values;
+  let priceInCents = 0;
+  if (price) priceInCents = price * 100;
+  return await db
+    .insert(eventsTable)
+    .values({ ...values, price: priceInCents });
 };

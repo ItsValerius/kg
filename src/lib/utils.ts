@@ -6,6 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function createSlug(title: string) {
-  return encodeURI(title.split(" ").join("-"));
+  if (title) {
+    return encodeURI(title.split(" ").join("-"));
+  }
+  return ""
 }
-

@@ -9,7 +9,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbSeparator
+  BreadcrumbSeparator,
 } from "../ui/breadcrumb";
 import { Button } from "../ui/button";
 import {
@@ -25,7 +25,6 @@ import { Input } from "../ui/input";
 const DashboardTableHeader = () => {
   const pathname = usePathname();
   const pathnames = pathname.split("/").filter((name) => !!name);
-  console.log(pathnames.slice(0,2));
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-2 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -35,14 +34,18 @@ const DashboardTableHeader = () => {
             return (
               <React.Fragment key={i}>
                 <BreadcrumbItem
-                  className={i + 1 === pathnames.length ? " text-foreground text-xl" : "text-muted-foreground"}
+                  className={
+                    i + 1 === pathnames.length
+                      ? "text-xl text-foreground"
+                      : "text-muted-foreground"
+                  }
                 >
                   <BreadcrumbLink asChild>
                     <Link
                       href={
                         i === 0
                           ? `/${name}`
-                          : `/${pathnames.slice(0, i+1).join("/")}`
+                          : `/${pathnames.slice(0, i + 1).join("/")}`
                       }
                       className="capitalize"
                     >
@@ -50,7 +53,7 @@ const DashboardTableHeader = () => {
                     </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                {i + 1 < pathnames.length && <BreadcrumbSeparator  />}
+                {i + 1 < pathnames.length && <BreadcrumbSeparator />}
               </React.Fragment>
             );
           })}

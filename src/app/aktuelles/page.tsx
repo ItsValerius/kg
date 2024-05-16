@@ -16,29 +16,16 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { db } from "@/server/db";
+import { postsTable } from "@/server/db/schema";
+import { desc } from "drizzle-orm";
 import { ChevronRightCircle, SearchIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const AktuellesPage = async () => {
-  // await db
-  //   .insert(usersTable)
-  //   .values({ name: "test name", age: 25, email: "test email" });
-  // // await db.insert(categoriesTable).values({ name: "test category 2" });
-
-  // const title = "test title 5";
-  // const slug = createSlug(title);
-
-  // await db.insert(postsTable).values({
-  //   title: title,
-  //   content: "test content 4",
-  //   userId: 1,
-  //   slug: slug,
-  //   teaser:""
-  // });
-  // await db.insert(categoriesToPostsTable).values({postId:3,categorieId:1});
   const posts = await db.query.postsTable.findMany({
     with: { author: true, categoriesToPosts: { with: { category: true } } },
+    orderBy: desc(postsTable.createdAt),
   });
   const categories = await db.query.categoriesTable.findMany({
     with: { categoriesToPosts: { with: { post: true } } },

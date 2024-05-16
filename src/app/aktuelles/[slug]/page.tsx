@@ -36,10 +36,10 @@ const AktuellesDetailsPage = async ({
       <div className=" p-4">
         <LinkWithUnderline
           href="/aktuelles"
-          spanClassName=" flex items-center gap-1 pb-1 w-fit"
+          spanClassName=" flex items-center gap-1 pb-1 w-fit "
         >
           <ChevronLeftCircle size={16} className="stroke-emerald-600" />
-          <Small>Alle News</Small>
+          <Small className="sm:text-lg">Alle News</Small>
         </LinkWithUnderline>
       </div>
       <section className="max-w-5xl p-4 mx-auto">

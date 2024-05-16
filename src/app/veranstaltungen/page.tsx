@@ -4,13 +4,13 @@ import P from "@/components/typography/p";
 import { Card, CardContent } from "@/components/ui/card";
 import { db } from "@/server/db";
 import { eventsTable } from "@/server/db/schema";
-import { gt } from "drizzle-orm";
+import { asc, gt } from "drizzle-orm";
 import { CalendarDaysIcon, ChevronRightCircle } from "lucide-react";
 
 const VeranstaltungenPage = async () => {
   const events = await db.query.eventsTable.findMany({
     where: gt(eventsTable.date, new Date()),
-    
+    orderBy: asc(eventsTable.date)
   });
 
   return (

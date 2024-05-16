@@ -26,7 +26,12 @@ import { Textarea } from "../ui/textarea";
 import { insertPostSchema } from "@/server/db/schema";
 
 const MAX_FILE_SIZE = 5000000;
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
 
 export const DashboardFormNews = () => {
   const fileSchema = z.object({
@@ -61,8 +66,6 @@ export const DashboardFormNews = () => {
     // await uploadImage(formData);
   }
 
-
-
   const [content, setContent] = useState<JSONContent>(defaultValue);
 
   return (
@@ -75,10 +78,10 @@ export const DashboardFormNews = () => {
               .handleSubmit(onSubmit)(e)
               .catch((err) => console.log(err));
           }}
-          className="flex flex-col gap-2 px-4 pb-2 md:flex-row lg:flex-row lg:pb-4"
+          className="flex grid-cols-2 flex-col gap-2 p-4 md:grid "
           id="dashboardForm"
         >
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1 space-y-0">
             <FormField
               control={form.control}
               name="title"
