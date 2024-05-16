@@ -19,8 +19,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Analytics />
-      <SpeedInsights />
       <body
         className={
           inter.className +
@@ -30,6 +28,8 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
