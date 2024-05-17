@@ -13,7 +13,6 @@ import {
 
 const DashboardAside = () => {
   const pathname = usePathname();
-  console.log(pathname.includes("/dashboard/veranstaltungen"));
 
   return (
     <aside className="flex w-full flex-row justify-between border-b p-4 sm:w-14 sm:flex-col sm:border-r">

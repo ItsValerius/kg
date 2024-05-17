@@ -8,6 +8,7 @@ export default {
   dbCredentials: {
     connectionString: env.DATABASE_URL,
   },
-  out:"./migrations",
+  out: "./migrations",
   tablesFilter: ["kg_*"],
+  schemaFilter: ["public"],
 } satisfies Config;

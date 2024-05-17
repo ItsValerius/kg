@@ -1,6 +1,5 @@
 import DashboardDetailsHeader from "@/components/dashboardPage/dashboardDetailsHeader";
 import DashboardTable from "@/components/dashboardPage/dashboardTable";
-import React from "react";
 
 const AktuellesDashboardPage = () => {
   return (

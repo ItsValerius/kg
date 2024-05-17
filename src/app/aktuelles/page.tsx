@@ -9,12 +9,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { env } from "@/env";
 import { db } from "@/server/db";
 import { postsTable } from "@/server/db/schema";
 import { desc } from "drizzle-orm";
@@ -62,9 +64,9 @@ const AktuellesPage = async () => {
                     <CardContent className="grid grid-rows-2 items-start gap-4 p-0 sm:grid-cols-[250px_1fr] sm:grid-rows-1 ">
                       <Image
                         alt="Article thumbnail"
-                        className="row-span-2 aspect-[3/2] max-h-[320px] w-full overflow-hidden rounded-t-md  sm:h-full sm:max-w-[250px] sm:rounded-md"
+                        className="row-span-2 aspect-[3/2] max-h-[320px] w-full overflow-hidden rounded-t-md sm:h-full sm:max-w-[250px]  sm:rounded-none sm:rounded-l-md"
                         height="100"
-                        src="/images/yt-banner.jpg"
+                        src={`${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/article_images/${post.slug}`}
                         width="150"
                       />
                       <div className="p-4">
@@ -84,19 +86,22 @@ const AktuellesPage = async () => {
                                 <TooltipTrigger>
                                   <Avatar>
                                     <AvatarImage
-                                      src="https://github.com/shadcn.png"
-                                      alt={post.author?.name}
+                                      asChild
+                                      src={post.author.imageUrl}
+                                      alt={post.author.name}
                                     />
-
+                                    <Image
+                                      src={post.author.imageUrl}
+                                      alt={post.author.name}
+                                      fill
+                                    />
                                     <AvatarFallback>
-                                      {post.author?.name}
+                                      <Skeleton className="h-10 w-10 animate-pulse rounded-full" />
                                     </AvatarFallback>
                                   </Avatar>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                  <Small className="">
-                                    {post.author?.name}
-                                  </Small>
+                                  <Small className="">{post.author.name}</Small>
                                 </TooltipContent>
                               </Tooltip>
                             </TooltipProvider>

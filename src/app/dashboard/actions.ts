@@ -1,30 +1,32 @@
 "use server";
 
 import { db } from "@/server/db";
-import { InsertEvent, eventsTable } from "@/server/db/schema";
+import {
+  InsertEvent,
+  InsertPost,
+  eventsTable,
+  postsTable,
+} from "@/server/db/schema";
 import { createClient } from "@/server/supabase/server";
 import { revalidatePath } from "next/cache";
 
 export const uploadImage = async (formData: FormData) => {
+  console.log("test");
+
   const supabase = createClient();
 
   const file = formData.get("file") as File;
-  if (!file) return;
+  const name = formData.get("name")?.toString();
+
+  if (!file || !name) return;
 
   const bucket = "article_images";
 
-  if (!file) return;
-  const name = "test2";
   // Call Storage API to upload file
   const { data, error } = await supabase.storage
     .from(bucket)
-    .upload(name.split(" ").join("-"), file);
+    .upload(name, file);
   console.log(data);
-
-  const {
-    data: { publicUrl },
-  } = supabase.storage.from(bucket).getPublicUrl("test");
-  console.log(publicUrl);
 
   // Handle error if upload failed
   if (error) {
@@ -45,5 +47,13 @@ export const insertEvent = async (values: InsertEvent) => {
   if (price) priceInCents = price * 100;
   await db.insert(eventsTable).values({ ...values, price: priceInCents });
   revalidatePath("/veranstaltungen");
+  return;
+};
+
+export const insertNews = async (values: InsertPost) => {
+  console.log(values);
+
+  const news = await db.insert(postsTable).values(values).returning();
+  revalidatePath("/aktuelles");
   return;
 };

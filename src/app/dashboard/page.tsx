@@ -15,7 +15,7 @@ export default async function DashboardPage() {
     return redirect("/login");
   }
 
-  const posts =  db.query.postsTable.findMany();
+  const posts = db.query.postsTable.findMany();
 
   return (
     <main>

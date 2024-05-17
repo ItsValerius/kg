@@ -4,12 +4,14 @@
 import { relations } from "drizzle-orm";
 import {
   integer,
+  pgSchema,
   pgTable,
   pgTableCreator,
   primaryKey,
   serial,
   text,
   timestamp,
+  uuid,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 /**
@@ -20,11 +22,19 @@ import { createInsertSchema } from "drizzle-zod";
  */
 export const createTable = pgTableCreator((name) => `kg_${name}`);
 
-export const usersTable = pgTable("users_table", {
-  id: serial("id").primaryKey(),
+const authSchema = pgSchema("auth");
+
+export const usersTable = authSchema.table("users", {
+  id: uuid("id").primaryKey(),
+});
+
+export const accountsTable = pgTable("accounts_table", {
+  id: uuid("id")
+    .primaryKey()
+    .references(() => usersTable.id, { onDelete: "cascade" }),
   name: text("name").notNull(),
-  age: integer("age").notNull(),
-  email: text("email").notNull().unique(),
+  imageUrl: text("image_url").notNull(),
+
 });
 export const postsTable = pgTable("posts_table", {
   id: serial("id").primaryKey(),
@@ -32,24 +42,24 @@ export const postsTable = pgTable("posts_table", {
   slug: text("slug").notNull().unique(),
   teaser: text("teaser").notNull(),
   content: text("content").notNull(),
-  userId: integer("user_id")
+  userId: uuid("user_id")
     .notNull()
-    .references(() => usersTable.id, { onDelete: "cascade" }),
+    .references(() => accountsTable.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
     .notNull()
     .$onUpdate(() => new Date()),
 });
 
-export const usersRelations = relations(usersTable, ({ many }) => ({
+export const accountsRelations = relations(accountsTable, ({ many }) => ({
   posts: many(postsTable),
 }));
 
 export const postsRelations = relations(postsTable, ({ many, one }) => ({
   categoriesToPosts: many(categoriesToPostsTable),
-  author: one(usersTable, {
+  author: one(accountsTable, {
     fields: [postsTable.userId],
-    references: [usersTable.id],
+    references: [accountsTable.id],
   }),
 }));
 
@@ -105,8 +115,8 @@ export const eventsTable = pgTable("events_table", {
     .$onUpdate(() => new Date()),
 });
 
-export type InsertUser = typeof usersTable.$inferInsert;
-export type SelectUser = typeof usersTable.$inferSelect;
+export type InsertAccount = typeof accountsTable.$inferInsert;
+export type SelectAccount = typeof accountsTable.$inferSelect;
 export type InsertPost = typeof postsTable.$inferInsert;
 export type SelectPost = typeof postsTable.$inferSelect;
 export type InsertCategory = typeof categoriesTable.$inferInsert;
@@ -114,6 +124,6 @@ export type SelectCategory = typeof categoriesTable.$inferSelect;
 export type InsertEvent = typeof eventsTable.$inferInsert;
 export type SelectEvent = typeof eventsTable.$inferSelect;
 
-export const insertUserSchema = createInsertSchema(usersTable);
+export const insertAccountSchema = createInsertSchema(accountsTable);
 export const insertPostSchema = createInsertSchema(postsTable);
 export const insertEventSchema = createInsertSchema(eventsTable);

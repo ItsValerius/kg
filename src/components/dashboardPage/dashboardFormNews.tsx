@@ -17,13 +17,18 @@ import { z } from "zod";
 import Editor from "@/components/editor/Editor";
 import { defaultValue } from "@/components/editor/defaultValue";
 import { type JSONContent } from "novel";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 import { generateHTML } from "@tiptap/html";
 import { StarterKit } from "novel/extensions";
 import { Textarea } from "../ui/textarea";
 
 import { insertPostSchema } from "@/server/db/schema";
+import { useRouter } from "next/navigation";
+import { insertNews, uploadImage } from "@/app/dashboard/actions";
+import { createClient } from "@/server/supabase/client";
+import { createSlug } from "@/lib/utils";
+import { Skeleton } from "../ui/skeleton";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -33,7 +38,7 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
-export const DashboardFormNews = () => {
+export const DashboardFormNews = ({ userId }: { userId: string }) => {
   const fileSchema = z.object({
     file: z
       .instanceof(File)
@@ -59,24 +64,30 @@ export const DashboardFormNews = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    const { title, content, teaser } = values;
+
+    const { title, content, teaser, slug, userId } = values;
     console.log({ title, content, teaser });
-    // const formData = new FormData();
-    // formData.append("file", values.file);
-    // await uploadImage(formData);
+    const formData = new FormData();
+    formData.append("file", values.file);
+    formData.append("name", slug);
+    await uploadImage(formData);
+    await insertNews({ title, content, teaser, slug, userId });
   }
 
   const [content, setContent] = useState<JSONContent>(defaultValue);
+  const router = useRouter();
 
   return (
     <div className="flex flex-col gap-2 overflow-x-scroll lg:overflow-auto">
       <Form {...form}>
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             form.setValue("content", generateHTML(content, [StarterKit]));
-            form
-              .handleSubmit(onSubmit)(e)
-              .catch((err) => console.log(err));
+            form.setValue("userId", userId);
+            form.setValue("slug", createSlug(form.getValues("title")));
+            await form.handleSubmit(onSubmit)(e);
+
+            router.push("/dashboard/aktuelles/erstellt");
           }}
           className="flex grid-cols-2 flex-col gap-2 p-4 md:grid "
           id="dashboardForm"
@@ -143,6 +154,7 @@ export const DashboardFormNews = () => {
           />
         </form>
       </Form>
+
       <Editor initialValue={content} onChange={setContent} />
       <Button form="dashboardForm" type="submit">
         Submit

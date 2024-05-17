@@ -14,7 +14,12 @@ const config = {
           port: "",
           pathname: "/s/**/**",
         },
-      
+      {
+        protocol:"https",
+        hostname:"cyzbnsrpopwufnbsgbbv.supabase.co",
+        port:"",
+        pathname:"/storage/v1/object/public/**"
+      }
       ],
     },
   };

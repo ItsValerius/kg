@@ -3,20 +3,12 @@ import { H1 } from "@/components/typography/h1";
 import H4 from "@/components/typography/h4";
 import Muted from "@/components/typography/muted";
 import Small from "@/components/typography/small";
-import {
-  Card,
-  CardContent
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/server/db";
 import { eventsTable } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
-import {
-  Calendar,
-  ChevronLeftCircle,
-  Clock,
-  EuroIcon
-} from "lucide-react";
+import { Calendar, ChevronLeftCircle, Clock, EuroIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 
 const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
@@ -28,7 +20,7 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <main className=" flex flex-col gap-4 py-4">
-      <div className="p-4 absolute">
+      <div className="absolute p-4">
         <LinkWithUnderline
           href="/veranstaltungen"
           spanClassName="flex items-center gap-1 pb-1 "
