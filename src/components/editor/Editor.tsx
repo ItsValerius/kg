@@ -1,6 +1,5 @@
 "use client";
 import {
-  EditorBubble,
   EditorCommand,
   EditorCommandEmpty,
   EditorCommandItem,
@@ -10,14 +9,8 @@ import {
   type JSONContent,
 } from "novel";
 import { ImageResizer, handleCommandNavigation } from "novel/extensions";
-import { useState } from "react";
 import { defaultExtensions } from "./extensions";
-import { ColorSelector } from "./selectors/color-selector";
-import { LinkSelector } from "./selectors/link-selector";
-import { NodeSelector } from "./selectors/node-selector";
 
-import { Separator } from "@/components/ui/separator";
-import { TextButtons } from "./selectors/text-buttons";
 import { TextButtonsBar } from "./selectors/text-buttons-bar";
 import { slashCommand, suggestionItems } from "./slash-command";
 
@@ -28,10 +21,6 @@ interface EditorProp {
   onChange: (value: JSONContent) => void;
 }
 const Editor = ({ initialValue, onChange }: EditorProp) => {
-  const [openNode, setOpenNode] = useState(false);
-  const [openColor, setOpenColor] = useState(false);
-  const [openLink, setOpenLink] = useState(false);
-
   return (
     <EditorRoot>
       <EditorContent

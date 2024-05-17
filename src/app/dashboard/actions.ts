@@ -2,8 +2,8 @@
 
 import { db } from "@/server/db";
 import {
-  InsertEvent,
-  InsertPost,
+  type InsertEvent,
+  type InsertPost,
   eventsTable,
   postsTable,
 } from "@/server/db/schema";
@@ -11,8 +11,6 @@ import { createClient } from "@/server/supabase/server";
 import { revalidatePath } from "next/cache";
 
 export const uploadImage = async (formData: FormData) => {
-  console.log("test");
-
   const supabase = createClient();
 
   const file = formData.get("file") as File;
@@ -40,8 +38,6 @@ export const uploadImage = async (formData: FormData) => {
 };
 
 export const insertEvent = async (values: InsertEvent) => {
-  console.log(values);
-
   const { price } = values;
   let priceInCents = 0;
   if (price) priceInCents = price * 100;
@@ -51,9 +47,7 @@ export const insertEvent = async (values: InsertEvent) => {
 };
 
 export const insertNews = async (values: InsertPost) => {
-  console.log(values);
-
-  const news = await db.insert(postsTable).values(values).returning();
+  await db.insert(postsTable).values(values).returning();
   revalidatePath("/aktuelles");
   return;
 };

@@ -23,15 +23,13 @@ import { generateHTML } from "@tiptap/html";
 import { StarterKit } from "novel/extensions";
 import { Textarea } from "../ui/textarea";
 
-import { insertEventSchema } from "@/server/db/schema";
-import { cn, createSlug } from "@/lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "../ui/calendar";
-import { db } from "@/server/db";
 import { insertEvent } from "@/app/dashboard/actions";
-import { redirect, useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { cn, createSlug } from "@/lib/utils";
+import { insertEventSchema } from "@/server/db/schema";
+import { CalendarIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Calendar } from "../ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 export const DashboardFormEvents = () => {
   const timeSchema = z.object({ time: z.string().time({ precision: 0 }) });
 

@@ -1,6 +1,5 @@
 import DashboardTable from "@/components/dashboardPage/dashboardTable";
 import DashboardTabs from "@/components/dashboardPage/dashboardTabs";
-import { db } from "@/server/db";
 import { createClient } from "@/server/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -15,7 +14,7 @@ export default async function DashboardPage() {
     return redirect("/login");
   }
 
-  const posts = db.query.postsTable.findMany();
+  // const posts = db.query.postsTable.findMany();
 
   return (
     <main>

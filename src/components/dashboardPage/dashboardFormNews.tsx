@@ -17,18 +17,16 @@ import { z } from "zod";
 import Editor from "@/components/editor/Editor";
 import { defaultValue } from "@/components/editor/defaultValue";
 import { type JSONContent } from "novel";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 
 import { generateHTML } from "@tiptap/html";
 import { StarterKit } from "novel/extensions";
 import { Textarea } from "../ui/textarea";
 
+import { insertNews, uploadImage } from "@/app/dashboard/actions";
+import { createSlug } from "@/lib/utils";
 import { insertPostSchema } from "@/server/db/schema";
 import { useRouter } from "next/navigation";
-import { insertNews, uploadImage } from "@/app/dashboard/actions";
-import { createClient } from "@/server/supabase/client";
-import { createSlug } from "@/lib/utils";
-import { Skeleton } from "../ui/skeleton";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
