@@ -19,12 +19,10 @@ import Small from "../typography/small";
 import { Card, CardContent } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
+import { getActivePosts } from "@/server/db/lib";
 
 const NewsSection = async () => {
-  const posts = await db.query.postsTable.findMany({
-    limit: 3,
-    with: { author: true, categoriesToPosts: { with: { category: true } } },
-  });
+  const posts = await getActivePosts(3);
   return (
     <section className="px-4 py-12 md:px-6">
       <div className="mx-auto flex max-w-5xl flex-col space-y-8">
@@ -32,7 +30,7 @@ const NewsSection = async () => {
           <H2>Aktuelles aus unserem Verein</H2>
           <P>Erfahren Sie mehr über aktuelles in unserem Verein.</P>
         </div>
-        <div className="flex gap-2 flex-col p-4">
+        <div className="flex flex-col gap-2 p-4">
           {posts.map((post) => {
             return (
               <article key={post.id}>

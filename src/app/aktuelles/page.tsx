@@ -18,17 +18,14 @@ import {
 } from "@/components/ui/tooltip";
 import { env } from "@/env";
 import { db } from "@/server/db";
-import { postsTable } from "@/server/db/schema";
-import { desc } from "drizzle-orm";
+import { getActivePosts } from "@/server/db/lib";
+
 import { ChevronRightCircle, SearchIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const AktuellesPage = async () => {
-  const posts = await db.query.postsTable.findMany({
-    with: { author: true, categoriesToPosts: { with: { category: true } } },
-    orderBy: desc(postsTable.createdAt),
-  });
+  const posts = await getActivePosts();
   const categories = await db.query.categoriesTable.findMany({
     with: { categoriesToPosts: { with: { post: true } } },
   });

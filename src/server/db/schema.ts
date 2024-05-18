@@ -4,6 +4,7 @@
 import { relations } from "drizzle-orm";
 import {
   integer,
+  pgEnum,
   pgSchema,
   pgTable,
   pgTableCreator,
@@ -20,6 +21,7 @@ import { createInsertSchema } from "drizzle-zod";
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
+
 export const createTable = pgTableCreator((name) => `kg_${name}`);
 
 const authSchema = pgSchema("auth");
@@ -34,13 +36,16 @@ export const accountsTable = pgTable("accounts_table", {
     .references(() => usersTable.id, { onDelete: "cascade" }),
   name: text("name").notNull(),
   imageUrl: text("image_url").notNull(),
-
 });
+
+export const statusEnum = pgEnum("status", ["draft", "active", "inactive"]);
+
 export const postsTable = pgTable("posts_table", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   slug: text("slug").notNull().unique(),
   teaser: text("teaser").notNull(),
+  status: statusEnum("status").notNull().default("draft"),
   content: text("content").notNull(),
   userId: uuid("user_id")
     .notNull()
@@ -105,6 +110,7 @@ export const eventsTable = pgTable("events_table", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   date: timestamp("date").notNull(),
+  status: statusEnum("status").notNull().default("draft"),
   slug: text("slug").notNull().unique(),
   teaser: text("teaser").notNull(),
   price: integer("price").notNull().default(0),

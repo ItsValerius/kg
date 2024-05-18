@@ -9,11 +9,9 @@ import { db } from "@/server/db";
 import { eventsTable } from "@/server/db/schema";
 import { gt } from "drizzle-orm";
 import { H2 } from "../typography/h2";
+import { getActiveEvents } from "@/server/db/lib";
 const EventsSection = async () => {
-  const events = await db.query.eventsTable.findMany({
-    where: gt(eventsTable.date, new Date()),
-    limit: 3,
-  });
+  const events = await getActiveEvents(3);
 
   if (events.length < 1) {
     return;

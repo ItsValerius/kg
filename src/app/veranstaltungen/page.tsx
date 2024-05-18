@@ -2,16 +2,11 @@ import LinkWithIcon from "@/components/Links/LinkWithIcon";
 import H3 from "@/components/typography/h3";
 import P from "@/components/typography/p";
 import { Card, CardContent } from "@/components/ui/card";
-import { db } from "@/server/db";
-import { eventsTable } from "@/server/db/schema";
-import { asc, gt } from "drizzle-orm";
+import { getActiveEvents } from "@/server/db/lib";
 import { CalendarDaysIcon, ChevronRightCircle } from "lucide-react";
 
 const VeranstaltungenPage = async () => {
-  const events = await db.query.eventsTable.findMany({
-    where: gt(eventsTable.date, new Date()),
-    orderBy: asc(eventsTable.date),
-  });
+  const events = await getActiveEvents();
 
   return (
     <main>
