@@ -1,26 +1,13 @@
-import LinkWithUnderline from "@/components/Links/LinkWithUnderline";
+import PostCard from "@/components/postPage/postCard";
 import { H1 } from "@/components/typography/h1";
-import H3 from "@/components/typography/h3";
-import Muted from "@/components/typography/muted";
 import P from "@/components/typography/p";
-import Small from "@/components/typography/small";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { env } from "@/env";
 import { db } from "@/server/db";
 import { getActivePosts } from "@/server/db/lib";
 
-import { ChevronRightCircle, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -55,85 +42,7 @@ const AktuellesPage = async () => {
         <div className="container grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
           <div className="grid gap-8">
             {posts.map((post) => {
-              return (
-                <article key={post.id}>
-                  <Card className="container space-y-4 p-0 duration-500 hover:shadow-lg hover:shadow-emerald-600/60 sm:space-y-0 ">
-                    <CardContent className="grid grid-rows-2 items-start gap-4 p-0 sm:grid-cols-[250px_1fr] sm:grid-rows-1 ">
-                      <Image
-                        alt="Article thumbnail"
-                        className="row-span-2 aspect-[3/2] max-h-[320px] w-full overflow-hidden rounded-t-md sm:h-full sm:max-w-[250px]  sm:rounded-none sm:rounded-l-md"
-                        height="100"
-                        src={`${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/article_images/${post.slug}`}
-                        width="150"
-                      />
-                      <div className="p-4">
-                        <div className="flex justify-between gap-2 space-x-2">
-                          <div>
-                            <H3>{post.title}</H3>
-                            <Muted>
-                              {post.createdAt.toLocaleDateString("de-De")}
-                            </Muted>
-                            <P className="line-clamp-2 [&:not(:first-child)]:mt-1">
-                              {post.teaser}
-                            </P>
-                          </div>
-                          <div className=" flex gap-2  self-start">
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger>
-                                  <Avatar>
-                                    <AvatarImage
-                                      asChild
-                                      src={post.author.imageUrl}
-                                      alt={post.author.name}
-                                    />
-                                    <Image
-                                      src={post.author.imageUrl}
-                                      alt={post.author.name}
-                                      fill
-                                    />
-                                    <AvatarFallback>
-                                      <Skeleton className="h-10 w-10 animate-pulse rounded-full" />
-                                    </AvatarFallback>
-                                  </Avatar>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <Small className="">{post.author.name}</Small>
-                                </TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                          </div>
-                        </div>
-                        <div className="flex w-full flex-col ">
-                          <div className="flex flex-wrap gap-1 px-1 sm:p-2 sm:px-0">
-                            {post.categoriesToPosts.map((relation) => {
-                              return (
-                                <Badge
-                                  variant={"secondary"}
-                                  key={relation.categorieId}
-                                >
-                                  {relation.category.name}
-                                </Badge>
-                              );
-                            })}
-                          </div>
-                          <LinkWithUnderline
-                            href={`/aktuelles/${post.slug}`}
-                            className="self-end"
-                            spanClassName=" flex items-center gap-1 pb-1"
-                          >
-                            <Small>Mehr Anzeigen</Small>
-                            <ChevronRightCircle
-                              size={16}
-                              className="stroke-emerald-600"
-                            />
-                          </LinkWithUnderline>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </article>
-              );
+              return <PostCard post={post} key={post.id} />;
             })}
           </div>
           <div className="space-y-8">

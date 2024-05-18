@@ -125,10 +125,23 @@ export type InsertAccount = typeof accountsTable.$inferInsert;
 export type SelectAccount = typeof accountsTable.$inferSelect;
 export type InsertPost = typeof postsTable.$inferInsert;
 export type SelectPost = typeof postsTable.$inferSelect;
+export type SelectPostWithAccountAndCategory =
+  typeof postsTable.$inferSelect & {
+    author: SelectAccount;
+    categoriesToPosts: SelectCategoryToPostsWithCategory[];
+  };
 export type InsertCategory = typeof categoriesTable.$inferInsert;
 export type SelectCategory = typeof categoriesTable.$inferSelect;
 export type InsertEvent = typeof eventsTable.$inferInsert;
 export type SelectEvent = typeof eventsTable.$inferSelect;
+
+export type InsertCategoryToPosts = typeof categoriesToPostsTable.$inferInsert;
+export type SelectCategoryToPosts = typeof categoriesToPostsTable.$inferSelect;
+
+export type InsertCategoryToPostsWithCategory =
+  typeof categoriesToPostsTable.$inferInsert & { category: InsertCategory };
+export type SelectCategoryToPostsWithCategory =
+  typeof categoriesToPostsTable.$inferSelect & { category: SelectCategory };
 
 export const insertAccountSchema = createInsertSchema(accountsTable);
 export const insertPostSchema = createInsertSchema(postsTable);
