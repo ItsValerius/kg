@@ -8,6 +8,7 @@ import Small from "../typography/small";
 import { db } from "@/server/db";
 import { eventsTable } from "@/server/db/schema";
 import { gt } from "drizzle-orm";
+import { H2 } from "../typography/h2";
 const EventsSection = async () => {
   const events = await db.query.eventsTable.findMany({
     where: gt(eventsTable.date, new Date()),
@@ -22,10 +23,10 @@ const EventsSection = async () => {
     <section className="px-4 py-12 md:px-6 ">
       <div className="mx-auto flex max-w-5xl flex-col space-y-8">
         <div className="space-y-2 text-center">
-          <h2 className="text-3xl font-bold">Bevorstehende Veranstaltungen</h2>
-          <p className="text-slate-700">
+          <H2>Bevorstehende Veranstaltungen</H2>
+          <P>
             Erfahren Sie mehr über unsere kommenden Karnevalsfeierlichkeiten.
-          </p>
+          </P>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {events.map((event) => {
