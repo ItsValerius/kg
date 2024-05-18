@@ -1,15 +1,12 @@
 import H3 from "@/components/typography/h3";
 import P from "@/components/typography/p";
 import { Card, CardContent } from "@/components/ui/card";
+import { getActiveEvents } from "@/server/db/lib";
 import { CalendarDaysIcon, ChevronRightCircle } from "lucide-react";
 import LinkWithIcon from "../Links/LinkWithIcon";
 import LinkWithUnderline from "../Links/LinkWithUnderline";
-import Small from "../typography/small";
-import { db } from "@/server/db";
-import { eventsTable } from "@/server/db/schema";
-import { gt } from "drizzle-orm";
 import { H2 } from "../typography/h2";
-import { getActiveEvents } from "@/server/db/lib";
+import Small from "../typography/small";
 const EventsSection = async () => {
   const events = await getActiveEvents(3);
 

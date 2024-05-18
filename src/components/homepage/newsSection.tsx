@@ -1,25 +1,23 @@
-import React from "react";
-import { H2 } from "../typography/h2";
-import P from "../typography/p";
-import { db } from "@/server/db";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { ChevronRightCircle } from "lucide-react";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { env } from "@/env";
+import { getActivePosts } from "@/server/db/lib";
+import { ChevronRightCircle } from "lucide-react";
+import Image from "next/image";
 import LinkWithUnderline from "../Links/LinkWithUnderline";
+import { H2 } from "../typography/h2";
 import H3 from "../typography/h3";
 import Muted from "../typography/muted";
+import P from "../typography/p";
 import Small from "../typography/small";
 import { Card, CardContent } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
-import Image from "next/image";
-import { getActivePosts } from "@/server/db/lib";
 
 const NewsSection = async () => {
   const posts = await getActivePosts(3);
