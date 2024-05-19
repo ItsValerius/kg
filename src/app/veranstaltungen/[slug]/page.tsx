@@ -82,15 +82,25 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
               <CardContent className="flex flex-col items-center gap-8">
                 <EuroIcon className="stroke-emerald-600" size={48} />
                 <div className="flex flex-col gap-2">
-                  <Muted className="text-center">Preis</Muted>
-                  <H4 className="text-center">
-                    {new Intl.NumberFormat("de-DE", {
-                      style: "currency",
-                      currency: "EUR",
-                      notation: "standard",
-                    }).format(event.price / 100)}
-                  </H4>
-                  <Muted className="text-center ">/ Person</Muted>
+                  {event.price !== 0 ? (
+                    <>
+                      <Muted className="text-center">Preis</Muted>
+                      <H4 className="text-center">
+                        {new Intl.NumberFormat("de-DE", {
+                          style: "currency",
+                          currency: "EUR",
+                          notation: "standard",
+                        }).format(event.price / 100)}
+                      </H4>
+                      <Muted className="text-center ">/ Person</Muted>
+                    </>
+                  ) : (
+                    <>
+                      <Muted className="text-center">Eintritt</Muted>
+                      <H4 className="text-center">Kostenlos </H4>
+                      <Muted className="text-center h-6">{""}</Muted>
+                    </>
+                  )}
                 </div>
               </CardContent>
             </Card>
