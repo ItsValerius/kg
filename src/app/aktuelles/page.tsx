@@ -11,6 +11,12 @@ import { SearchIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import type{ Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Aktuelles"
+};
+
 const AktuellesPage = async () => {
   const posts = await getActivePosts();
   const categories = await db.query.categoriesTable.findMany({

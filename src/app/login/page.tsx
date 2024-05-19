@@ -1,8 +1,13 @@
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/server/supabase/server";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
+
+export const metadata: Metadata = {
+  title: "Login",
+};
 
 export default function Login({
   searchParams,
@@ -55,11 +60,11 @@ export default function Login({
 
   return (
     <main>
-      <div className="max-w-5xl mx-auto flex justify-center items-center h-full">
-        <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2 ">
+      <div className="mx-auto flex h-full max-w-5xl items-center justify-center">
+        <div className="flex w-full flex-1 flex-col justify-center gap-2 px-8 sm:max-w-md ">
           <Link
             href="/"
-            className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+            className="bg-btn-background hover:bg-btn-background-hover group absolute left-8 top-8 flex items-center rounded-md px-4 py-2 text-sm text-foreground no-underline"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,12 +83,12 @@ export default function Login({
             Back
           </Link>
 
-          <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+          <form className="flex w-full flex-1 flex-col justify-center gap-2 text-foreground animate-in">
             <label className="text-md" htmlFor="email">
               Email
             </label>
             <Input
-              className=" px-4 py-2  mb-6 focus-visible:ring-emerald-500/50"
+              className=" mb-6 px-4  py-2 focus-visible:ring-emerald-500/50"
               name="email"
               placeholder="you@example.com"
               required
@@ -92,7 +97,7 @@ export default function Login({
               Passwort
             </label>
             <Input
-              className="px-4 py-2  mb-6 focus-visible:ring-emerald-500/50"
+              className="mb-6 px-4  py-2 focus-visible:ring-emerald-500/50"
               type="password"
               name="password"
               placeholder="••••••••"
@@ -100,13 +105,13 @@ export default function Login({
             />
             <SubmitButton
               formAction={signIn}
-              className="bg-emerald-600 text-white rounded-md px-4 py-2 text-foreground mb-2"
+              className="mb-2 rounded-md bg-emerald-600 px-4 py-2 text-foreground text-white"
               pendingText="Logging In..."
             >
               Login
             </SubmitButton>
             {searchParams?.message && (
-              <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+              <p className="mt-4 bg-foreground/10 p-4 text-center text-foreground">
                 {searchParams.message}
               </p>
             )}

@@ -1,6 +1,10 @@
 import { H1 } from "@/components/typography/h1";
 import { H2 } from "@/components/typography/h2";
+import type{ Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Datenschutz"
+};
 const DatenschutzerklärungPage = () => {
   return (
     <main className="max-w-3xl mx-auto p-4 flex flex-col gap-2">

@@ -1,5 +1,10 @@
 import EventCard from "@/components/eventPage/eventCard";
 import { getActiveEvents } from "@/server/db/lib";
+import type{ Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Veranstaltungen"
+};
 
 const VeranstaltungenPage = async () => {
   const events = await getActiveEvents();

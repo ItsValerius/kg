@@ -8,7 +8,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "KG Knallköpp Golkrath",
+  title: {
+    default: "KG Knallköpp Golkrath",
+    template: "KG Knallköpp Golkrath | %s",
+  },
   description: "Website der KG Knallköpp Golkrath e.V.",
 };
 

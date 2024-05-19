@@ -11,6 +11,19 @@ import { eq } from "drizzle-orm";
 import { Calendar, ChevronLeftCircle, Clock, EuroIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata({ params }: Props) {
+  const event = await db.query.eventsTable.findFirst({
+    where: eq(eventsTable.slug, params.slug),
+  });
+  return {
+    title: event?.name,
+  };
+}
+
 const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
   const event = await db.query.eventsTable.findFirst({
     where: eq(eventsTable.slug, params.slug),
@@ -98,7 +111,7 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
                     <>
                       <Muted className="text-center">Eintritt</Muted>
                       <H4 className="text-center">Kostenlos </H4>
-                      <Muted className="text-center h-6">{""}</Muted>
+                      <Muted className="h-6 text-center">{""}</Muted>
                     </>
                   )}
                 </div>

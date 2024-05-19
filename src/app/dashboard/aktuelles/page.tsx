@@ -2,7 +2,13 @@ import DashboardDetailsHeader from "@/components/dashboardPage/dashboardDetailsH
 import DashboardTable from "@/components/dashboardPage/dashboardTable";
 import { db } from "@/server/db";
 
-const AktuellesDashboardPage = async() => {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard | News",
+};
+
+const AktuellesDashboardPage = async () => {
   const posts = await db.query.postsTable.findMany();
   return (
     <main className="w-full ">

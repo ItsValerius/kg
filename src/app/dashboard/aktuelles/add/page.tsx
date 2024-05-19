@@ -2,11 +2,15 @@ import { DashboardFormNews } from "@/components/dashboardPage/dashboardFormNews"
 import { H2 } from "@/components/typography/h2";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { createClient } from "@/server/supabase/server";
+import type { Metadata } from "next";
 
-const AddEventPage = async() => {
+export const metadata: Metadata = {
+  title: "Dashboard | News | Hinzufügen",
+};
+const AddEventPage = async () => {
   const supabase = createClient();
   const user = await supabase.auth.getUser();
-  if(!user.data.user) return;
+  if (!user.data.user) return;
   return (
     <main>
       <div className="p-4">

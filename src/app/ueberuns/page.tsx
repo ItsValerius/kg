@@ -1,6 +1,11 @@
 import { H2 } from "@/components/typography/h2";
 import P from "@/components/typography/p";
+import type{ Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Über uns"
+};
 
 const UeberunsPage = () => {
   return (
