@@ -1,4 +1,4 @@
-import { SelectPostWithAccountAndCategory } from "@/server/db/schema";
+import type{ SelectPostWithAccountAndCategory } from "@/server/db/schema";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   TooltipProvider,
