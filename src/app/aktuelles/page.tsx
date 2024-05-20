@@ -50,10 +50,10 @@ const AktuellesPage = async () => {
             })}
           </div>
           <div className="grid space-y-8">
-            <CategoriesCard categories={categories} />
             <Suspense fallback={<FallbackCard />}>
-              <SearchCard />
+              <CategoriesCard categories={categories} />
             </Suspense>
+            <SearchCard />
           </div>
         </div>
       </div>
