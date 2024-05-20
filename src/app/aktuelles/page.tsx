@@ -8,6 +8,8 @@ import { getActivePosts } from "@/server/db/lib";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
+import FallbackCard from "@/components/postPage/fallbackCard";
 
 export const metadata: Metadata = {
   title: "Aktuelles",
@@ -49,7 +51,9 @@ const AktuellesPage = async () => {
           </div>
           <div className="grid space-y-8">
             <CategoriesCard categories={categories} />
-            <SearchCard />
+            <Suspense fallback={<FallbackCard />}>
+              <SearchCard />
+            </Suspense>
           </div>
         </div>
       </div>
