@@ -1,5 +1,5 @@
-import type{ SelectPostWithAccountAndCategory } from "@/server/db/schema";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import type { SelectPostWithAccountAndCategory } from "@/server/db/schema";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   TooltipProvider,
   Tooltip,
@@ -15,7 +15,6 @@ import Muted from "../typography/muted";
 import P from "../typography/p";
 import Small from "../typography/small";
 import { Card, CardContent } from "../ui/card";
-import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
 
@@ -45,19 +44,13 @@ const PostCard = ({ post }: { post: SelectPostWithAccountAndCategory }) => {
                   <Tooltip>
                     <TooltipTrigger>
                       <Avatar>
-                        <AvatarImage
-                          asChild
-                          src={post.author.imageUrl}
-                          alt={post.author.name}
-                        />
+                        <AvatarImage asChild />
                         <Image
                           src={post.author.imageUrl}
                           alt={post.author.name}
                           fill
+                          sizes="128px"
                         />
-                        <AvatarFallback>
-                          <Skeleton className="h-10 w-10 animate-pulse rounded-full" />
-                        </AvatarFallback>
                       </Avatar>
                     </TooltipTrigger>
                     <TooltipContent>
