@@ -1,9 +1,11 @@
 import EventCard from "@/components/eventPage/eventCard";
+import { H2 } from "@/components/typography/h2";
+import P from "@/components/typography/p";
 import { getActiveEvents } from "@/server/db/lib";
-import type{ Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Veranstaltungen"
+  title: "Veranstaltungen",
 };
 
 const VeranstaltungenPage = async () => {
@@ -14,12 +16,10 @@ const VeranstaltungenPage = async () => {
       <section className="px-4 py-12 md:px-6">
         <div className="mx-auto max-w-5xl space-y-8">
           <div className="space-y-2 text-center">
-            <h2 className="text-3xl font-bold">
-              Bevorstehende Veranstaltungen
-            </h2>
-            <p className="text-slate-700">
+            <H2>Bevorstehende Veranstaltungen</H2>
+            <P>
               Erfahren Sie mehr über unsere kommenden Karnevalsfeierlichkeiten.
-            </p>
+            </P>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {events.map((event) => {

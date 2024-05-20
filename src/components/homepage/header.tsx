@@ -94,7 +94,10 @@ const Header = () => {
             <SheetClose asChild>
               <Link
                 href="/"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                className={cn(
+                  "flex items-center gap-4 px-2.5 text-muted-foreground ",
+                  { "text-foreground": pathname === "/" },
+                )}
               >
                 <Home
                   className={cn("h-5 w-5 ", {
@@ -107,7 +110,10 @@ const Header = () => {
             <SheetClose asChild>
               <Link
                 href="/veranstaltungen"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                className={cn(
+                  "flex items-center gap-4 px-2.5 text-muted-foreground ",
+                  { "text-foreground": pathname.includes("/veranstaltungen") },
+                )}
               >
                 <Calendar
                   className={cn("h-5 w-5 ", {
@@ -120,7 +126,10 @@ const Header = () => {
             <SheetClose asChild>
               <Link
                 href="/aktuelles"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                className={cn(
+                  "flex items-center gap-4 px-2.5 text-muted-foreground ",
+                  { "text-foreground": pathname.includes("/aktuelles") },
+                )}
               >
                 <Newspaper
                   className={cn("h-5 w-5 ", {
@@ -133,7 +142,10 @@ const Header = () => {
             <SheetClose asChild>
               <Link
                 href="/ueberuns"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                className={cn(
+                  "flex items-center gap-4 px-2.5 text-muted-foreground ",
+                  { "text-foreground": pathname === "/ueberuns" },
+                )}
               >
                 <Users2
                   className={cn("h-5 w-5 ", {
@@ -146,7 +158,10 @@ const Header = () => {
             <SheetClose asChild>
               <Link
                 href="/kontakt"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                className={cn(
+                  "flex items-center gap-4 px-2.5 text-muted-foreground ",
+                  { "text-foreground": pathname === "/kontakt" },
+                )}
               >
                 <Contact2
                   className={cn("h-5 w-5 ", {
