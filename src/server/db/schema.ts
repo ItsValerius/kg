@@ -132,11 +132,19 @@ export type SelectPostWithAccountAndCategory =
   };
 export type InsertCategory = typeof categoriesTable.$inferInsert;
 export type SelectCategory = typeof categoriesTable.$inferSelect;
+
+export type SelectCategoryWithPosts = typeof categoriesTable.$inferSelect & {
+  categoriesToPosts: SelectCategoryToPostsWithPosts[];
+};
+
 export type InsertEvent = typeof eventsTable.$inferInsert;
 export type SelectEvent = typeof eventsTable.$inferSelect;
 
 export type InsertCategoryToPosts = typeof categoriesToPostsTable.$inferInsert;
 export type SelectCategoryToPosts = typeof categoriesToPostsTable.$inferSelect;
+
+export type SelectCategoryToPostsWithPosts =
+  typeof categoriesToPostsTable.$inferSelect & { post: SelectPost };
 
 export type InsertCategoryToPostsWithCategory =
   typeof categoriesToPostsTable.$inferInsert & { category: InsertCategory };
