@@ -3,12 +3,12 @@ import { H2 } from "@/components/typography/h2";
 
 const HeroSection = () => {
   return (
-    <section className="px-4 md:px-6 flex flex-col items-center justify-center bg-[url(https://knallkoepp-golkrath.de/s/img/emotionheader.jpg)] bg-fill bg-center lg:bg-cover min-h-64 lg:bg-top">
-      <div className="max-w-3xl text-center space-y-4 text-white lg:p-4 ">
-        <H1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl [text-shadow:_0_4px_0_rgb(0_0_0/_80%)]">
+    <section className="bg-fill flex min-h-64 flex-col items-center justify-center bg-[url(https://knallkoepp-golkrath.de/s/img/emotionheader.jpg)] bg-center px-4 [border-image:linear-gradient(hsl(130_80%_10%_/_0.5),_hsl(130_50%_80%_/_0.5))_fill_1] md:px-6 lg:bg-cover lg:bg-top">
+      <div className="max-w-3xl space-y-4 text-center text-white lg:p-4 ">
+        <H1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl ">
           Feiern Sie mit uns!
         </H1>
-        <H2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0 [text-shadow:_0_2px_0_rgb(0_0_0/_80%)] border-0">
+        <H2 className="scroll-m-20 border-0 text-3xl font-semibold tracking-tight first:mt-0">
           Entdecken Sie die Tradition und den Spaß des deutschen Karnevals mit
           unserem Verein.
         </H2>

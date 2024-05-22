@@ -67,7 +67,7 @@ const Header = () => {
       <Sheet>
         <SheetTrigger asChild>
           <Button
-            className="text-white  md:hidden"
+            className=" text-white md:hidden"
             size="icon"
             variant="outline"
           >

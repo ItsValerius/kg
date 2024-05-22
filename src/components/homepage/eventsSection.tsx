@@ -23,9 +23,7 @@ const EventsSection = async () => {
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {events.map((event) => {
-            return (
-              <EventCard event={event} key={event.id} />
-            );
+            return <EventCard event={event} key={event.id} />;
           })}
         </div>
         <LinkWithUnderline

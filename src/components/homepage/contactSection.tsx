@@ -7,9 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 
 const ContactSection = () => {
   return (
-    <section className="py-12 px-4 md:px-6 ">
-      <div className="max-w-3xl mx-auto space-y-8">
-        <div className="text-center space-y-2">
+    <section className="px-4 py-12 md:px-6 ">
+      <div className="mx-auto max-w-3xl space-y-8">
+        <div className="space-y-2 text-center">
           <H2 className="text-3xl font-bold">Kontaktieren Sie uns</H2>
           <P className="text-slate-700">
             Haben Sie Fragen oder möchten Sie mehr über unseren Verein erfahren?

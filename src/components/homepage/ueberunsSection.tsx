@@ -4,9 +4,9 @@ import Image from "next/image";
 
 const UeberunsSection = () => {
   return (
-    <section className="py-12 px-4 md:px-6">
-      <div className="max-w-5xl mx-auto space-y-8">
-        <div className="text-center space-y-2">
+    <section className="px-4 py-12 md:px-6">
+      <div className="mx-auto max-w-5xl space-y-8">
+        <div className="space-y-2 text-center">
           <H2 className="text-3xl font-bold">Über unseren Verein</H2>
           <P className="text-slate-700">
             Erfahren Sie mehr über die Geschichte und Tradition unseres
@@ -17,7 +17,7 @@ const UeberunsSection = () => {
           <div>
             <Image
               alt="Club History"
-              className="rounded-lg aspect-[600/400] object-cover "
+              className="aspect-[600/400] rounded-lg object-cover "
               height="400"
               src="https://knallkoepp-golkrath.de/s/img/emotionheader.jpg"
               width="600"
