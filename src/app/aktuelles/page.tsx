@@ -1,16 +1,13 @@
 import CategoriesCard from "@/components/postPage/categoriesCard";
-import SearchCard from "@/components/postPage/searchCard";
+import FallbackCard from "@/components/postPage/fallbackCard";
 import PostCard from "@/components/postPage/postCard";
-import { H1 } from "@/components/typography/h1";
+import SearchCard from "@/components/postPage/searchCard";
+import { H2 } from "@/components/typography/h2";
 import P from "@/components/typography/p";
 import { db } from "@/server/db";
 import { getActivePosts } from "@/server/db/lib";
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { Suspense } from "react";
-import FallbackCard from "@/components/postPage/fallbackCard";
-import { H2 } from "@/components/typography/h2";
 
 export const metadata: Metadata = {
   title: "Aktuelles",

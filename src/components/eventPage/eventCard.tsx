@@ -4,7 +4,7 @@ import LinkWithIcon from "../Links/LinkWithIcon";
 import H3 from "../typography/h3";
 import P from "../typography/p";
 import { Card, CardContent } from "../ui/card";
-import { SelectEvent } from "@/server/db/schema";
+import type{ SelectEvent } from "@/server/db/schema";
 
 const EventCard = ({ event }: { event: SelectEvent }) => {
   return (

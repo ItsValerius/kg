@@ -1,10 +1,8 @@
-import { DashboardFormEvents } from "@/components/dashboardPage/dashboardFormEvents";
 import { DashboardFormNews } from "@/components/dashboardPage/dashboardFormNews";
 import { db } from "@/server/db";
-import { eventsTable, postsTable } from "@/server/db/schema";
+import { postsTable } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
-import React from "react";
 
 const EditAktuellesPage = async ({ params }: { params: { slug: string } }) => {
   const post = await db.query.postsTable.findFirst({

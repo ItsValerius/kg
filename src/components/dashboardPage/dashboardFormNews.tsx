@@ -25,7 +25,7 @@ import { Textarea } from "../ui/textarea";
 
 import { insertNews, uploadImage } from "@/app/dashboard/actions";
 import { createSlug } from "@/lib/utils";
-import { SelectPost, insertPostSchema } from "@/server/db/schema";
+import { type SelectPost, insertPostSchema } from "@/server/db/schema";
 import { useRouter } from "next/navigation";
 
 const MAX_FILE_SIZE = 5000000;
@@ -115,6 +115,7 @@ export const DashboardFormNews = ({
             <FormField
               control={form.control}
               name="file"
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               render={({ field: { value, onChange, ...field } }) => (
                 <FormItem>
                   <FormLabel>File</FormLabel>

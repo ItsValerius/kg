@@ -25,7 +25,7 @@ import { Textarea } from "../ui/textarea";
 
 import { insertEvent } from "@/app/dashboard/actions";
 import { cn, createSlug } from "@/lib/utils";
-import { SelectEvent, insertEventSchema } from "@/server/db/schema";
+import { type SelectEvent, insertEventSchema } from "@/server/db/schema";
 import { CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Calendar } from "../ui/calendar";
@@ -43,10 +43,8 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    // console.log({ values });
-    const [hours, minutes, _] = values.time.split(":");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [hours, minutes, _seconds] = values.time.split(":");
     values.date.setHours(Number(hours));
     values.date.setMinutes(Number(minutes));
     try {
@@ -105,6 +103,7 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
             <FormField
               control={form.control}
               name="price"
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               render={({ field: { value, onChange, ...field } }) => (
                 <FormItem className="flex flex-col gap-1 space-y-0">
                   <FormLabel>Eintrittspreis</FormLabel>
@@ -181,6 +180,7 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
             <FormField
               control={form.control}
               name="time"
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               render={({ field: { value, onChange, ...field } }) => (
                 <FormItem className="flex flex-col gap-1 space-y-0">
                   <FormLabel>Uhrzeit</FormLabel>
