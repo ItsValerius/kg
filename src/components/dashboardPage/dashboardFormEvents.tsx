@@ -25,19 +25,19 @@ import { Textarea } from "../ui/textarea";
 
 import { insertEvent } from "@/app/dashboard/actions";
 import { cn, createSlug } from "@/lib/utils";
-import { insertEventSchema } from "@/server/db/schema";
+import { SelectEvent, insertEventSchema } from "@/server/db/schema";
 import { CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-export const DashboardFormEvents = () => {
+export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
   const timeSchema = z.object({ time: z.string().time({ precision: 0 }) });
 
   const formSchema = insertEventSchema.merge(timeSchema);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      ...event,
     },
   });
 
@@ -45,14 +45,29 @@ export const DashboardFormEvents = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log({ values });
-    await insertEvent(values);
+    // console.log({ values });
+    const [hours, minutes, _] = values.time.split(":");
+    values.date.setHours(Number(hours));
+    values.date.setMinutes(Number(minutes));
+    try {
+      await insertEvent(values);
+    } catch (err) {
+      return;
+    }
+    router.push("/dashboard/veranstaltungen/erstellt");
     // const formData = new FormData();
     // formData.append("file", values.file);
     // await uploadImage(formData);
   }
 
   const [content, setContent] = useState<JSONContent>(defaultValue);
+  const [price, setPrice] = useState<number>(event ? event.price / 100 : 0);
+  const [time, setTime] = useState<string>(
+    event?.date.getHours().toString() +
+      ":" +
+      event?.date.getMinutes().toString() +
+      ":00",
+  );
   const router = useRouter();
   return (
     <div className="flex flex-col gap-2 overflow-x-scroll lg:overflow-auto">
@@ -61,8 +76,11 @@ export const DashboardFormEvents = () => {
           onSubmit={async (e) => {
             form.setValue("description", generateHTML(content, [StarterKit]));
             form.setValue("slug", createSlug(form.getValues("name")));
+            form.setValue("time", time);
+            console.log(time);
+
             await form.handleSubmit(onSubmit)(e);
-            router.push("/dashboard/veranstaltungen/erstellt");
+            // router.push("/dashboard/veranstaltungen/erstellt");
           }}
           className="flex flex-col gap-2 p-4 md:grid md:grid-cols-3 "
           id="dashboardForm"
@@ -94,10 +112,13 @@ export const DashboardFormEvents = () => {
                     <Input
                       type="number"
                       placeholder="Preis..."
-                      onChange={(event) =>
-                        onChange(Number(event.currentTarget?.value))
-                      }
+                      onChange={(event) => {
+                        onChange(Number(event.currentTarget?.value));
+                        setPrice(Number(event.currentTarget?.value));
+                      }}
                       {...field}
+                      value={price}
+                      step={0.1}
                       className="flex w-full flex-col justify-between"
                     />
                   </FormControl>
@@ -167,10 +188,12 @@ export const DashboardFormEvents = () => {
                     <Input
                       type="time"
                       required
-                      onChange={(event) =>
-                        onChange(event.currentTarget?.value + ":00")
-                      }
+                      onChange={(event) => {
+                        onChange(event.currentTarget?.value + ":00");
+                        setTime(event.currentTarget?.value + ":00");
+                      }}
                       placeholder="11:11"
+                      value={time}
                       {...field}
                       className="flex w-full flex-col justify-between"
                     />

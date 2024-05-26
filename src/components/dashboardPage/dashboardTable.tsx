@@ -27,6 +27,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { type SelectEvent, type SelectPost } from "@/server/db/schema";
+import { env } from "@/env";
+import Link from "next/link";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import DashboardUpdateStatus from "./dashboardUpdateStatus";
 
 export default function DashboardTable({
   events,
@@ -36,21 +50,26 @@ export default function DashboardTable({
   posts?: SelectPost[];
 }) {
   return (
-    <Card className="">
+    <Card>
       <CardHeader>
-        <CardTitle>{}</CardTitle>
+        <CardTitle>{events ? "Events" : "Posts"}</CardTitle>
         <CardDescription>
-          Manage your products and view their sales performance.
+          {events ? "Event Description" : "Posts Description"}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Table>
+        <Table className="">
           <TableHeader>
             <TableRow>
+              {events ? null : (
+                <TableHead className="hidden sm:table-cell">Bild</TableHead>
+              )}
               <TableHead>Name</TableHead>
               <TableHead>Beschreibung</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead className="hidden md:table-cell">Preis</TableHead>
+              {events ? (
+                <TableHead className="hidden md:table-cell">Preis</TableHead>
+              ) : null}
 
               <TableHead className="hidden md:table-cell">Erstellt</TableHead>
               <TableHead>
@@ -63,14 +82,16 @@ export default function DashboardTable({
               return (
                 <TableRow key={event.id}>
                   <TableCell className="font-medium">{event.name}</TableCell>
-                  <TableCell className="w-32">
+                  <TableCell className="max-w-32">
                     <div
                       className=" line-clamp-2 w-full text-balance font-medium"
                       dangerouslySetInnerHTML={{ __html: event.description }}
                     ></div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline">Draft</Badge>
+                    <Badge variant="outline" className="capitalize">
+                      {event.status}{" "}
+                    </Badge>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
                     {new Intl.NumberFormat("de-DE", {
@@ -81,7 +102,11 @@ export default function DashboardTable({
                   </TableCell>
 
                   <TableCell className="hidden md:table-cell">
-                    2023-07-12 10:42 AM
+                    {new Intl.DateTimeFormat("de-DE", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                    }).format(event.createdAt)}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
@@ -97,8 +122,43 @@ export default function DashboardTable({
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href={
+                              "/dashboard" +
+                              (events ? "/veranstaltungen" : "/aktuelles") +
+                              "/edit" +
+                              "/" +
+                              event.slug
+                            }
+                          >
+                            Edit
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <AlertDialog>
+                            <AlertDialogTrigger>Delete</AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>
+                                  Are you absolutely sure?
+                                </AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This action cannot be undone. This will
+                                  permanently delete your account and remove
+                                  your data from our servers.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction>Continue</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <DashboardUpdateStatus data={event} />
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -113,22 +173,29 @@ export default function DashboardTable({
                       alt="Product image"
                       className="aspect-square rounded-md object-cover"
                       height="64"
-                      src="/placeholder.svg"
+                      src={`${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/article_images/${post.slug}`}
                       width="64"
                     />
                   </TableCell>
-                  <TableCell className="font-medium">
-                    Laser Lemonade Machine
+                  <TableCell className="font-medium">{post.title}</TableCell>
+                  <TableCell className="max-w-32">
+                    <div
+                      className=" line-clamp-2 w-full text-balance font-medium"
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    ></div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline">Draft</Badge>
+                    <Badge variant="outline" className="capitalize">
+                      {post.status}
+                    </Badge>
                   </TableCell>
+
                   <TableCell className="hidden md:table-cell">
-                    $499.99
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">25</TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    2023-07-12 10:42 AM
+                    {new Intl.DateTimeFormat("de-DE", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                    }).format(post.createdAt)}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
@@ -144,8 +211,48 @@ export default function DashboardTable({
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href={
+                              "/dashboard" +
+                              (events ? "/veranstaltungen" : "/aktuelles") +
+                              "/edit" +
+                              "/" +
+                              post.slug
+                            }
+                          >
+                            Edit
+                          </Link>
+                        </DropdownMenuItem>
+                        <AlertDialog>
+                          <DropdownMenuItem>
+                            <AlertDialogTrigger
+                              className="hover:cursor-default"
+                              asChild
+                            >
+                              <Link href={"#"}>Delete</Link>
+                            </AlertDialogTrigger>
+                          </DropdownMenuItem>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>
+                                Are you absolutely sure?
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will
+                                permanently delete your account and remove your
+                                data from our servers.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction>Continue</AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                        <DropdownMenuItem>
+                          <DashboardUpdateStatus data={post} />
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

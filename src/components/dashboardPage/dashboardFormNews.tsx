@@ -25,7 +25,7 @@ import { Textarea } from "../ui/textarea";
 
 import { insertNews, uploadImage } from "@/app/dashboard/actions";
 import { createSlug } from "@/lib/utils";
-import { insertPostSchema } from "@/server/db/schema";
+import { SelectPost, insertPostSchema } from "@/server/db/schema";
 import { useRouter } from "next/navigation";
 
 const MAX_FILE_SIZE = 5000000;
@@ -36,7 +36,13 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
-export const DashboardFormNews = ({ userId }: { userId: string }) => {
+export const DashboardFormNews = ({
+  userId,
+  post,
+}: {
+  userId: string;
+  post?: SelectPost;
+}) => {
   const fileSchema = z.object({
     file: z
       .instanceof(File)
@@ -53,8 +59,7 @@ export const DashboardFormNews = ({ userId }: { userId: string }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      teaser: "",
+      ...post,
     },
   });
 

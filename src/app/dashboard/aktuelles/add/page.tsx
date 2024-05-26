@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Dashboard | News | Hinzufügen",
 };
-const AddEventPage = async () => {
+const AddNewsPage = async () => {
   const supabase = createClient();
   const user = await supabase.auth.getUser();
   if (!user.data.user) return;
@@ -27,4 +27,4 @@ const AddEventPage = async () => {
   );
 };
 
-export default AddEventPage;
+export default AddNewsPage;
