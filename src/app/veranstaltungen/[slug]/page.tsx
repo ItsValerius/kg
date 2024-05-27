@@ -38,13 +38,13 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
           href="/veranstaltungen"
           spanClassName="flex items-center gap-1 pb-1 "
         >
-          <ChevronLeftCircle size={16} className="stroke-emerald-600" />
+          <ChevronLeftCircle size={16} className="stroke-primary" />
           <Small className="sm:text-lg">Alle Veranstaltungen</Small>
         </LinkWithUnderline>
       </div>
       <section className="px-4 py-12 md:px-6">
         <div className="mx-auto max-w-5xl space-y-8">
-          <H4 className="bg-gradient-to-r from-emerald-700 to-lime-200 bg-clip-text text-center text-transparent">
+          <H4 className="bg-gradient-to-r from-primary to-lime-200 bg-clip-text text-center text-transparent">
             {new Intl.DateTimeFormat("de-DE", {
               year: "numeric",
               month: "long",
@@ -53,9 +53,9 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
           </H4>
           <H1 className="text-balance text-center">{event.name}</H1>
           <div className="grid gap-4 md:grid-cols-3">
-            <Card className="p-4 duration-500 hover:shadow-lg hover:shadow-emerald-600/60">
+            <Card className="p-4 duration-500 hover:shadow-md hover:shadow-primary/60">
               <CardContent className="flex flex-col items-center gap-8">
-                <Calendar className="stroke-emerald-600" size={48} />
+                <Calendar className="stroke-primary" size={48} />
                 <div className="flex flex-col gap-2">
                   <Muted className="text-center ">Am</Muted>
                   <H4 className="text-center">
@@ -75,9 +75,9 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
                 </div>
               </CardContent>
             </Card>
-            <Card className="p-4 duration-500 hover:shadow-lg hover:shadow-emerald-600/60">
+            <Card className="p-4 duration-500 hover:shadow-md hover:shadow-primary/60">
               <CardContent className="flex flex-col items-center gap-8">
-                <Clock className="stroke-emerald-600" size={48} />
+                <Clock className="stroke-primary" size={48} />
                 <div className="flex flex-col gap-2">
                   <Muted className="text-center ">Ab</Muted>
                   <H4 className="text-center">
@@ -91,9 +91,9 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
                 </div>
               </CardContent>
             </Card>
-            <Card className="p-4 duration-500 hover:shadow-lg hover:shadow-emerald-600/60">
+            <Card className="p-4 duration-500 hover:shadow-md hover:shadow-primary/60">
               <CardContent className="flex flex-col items-center gap-8">
-                <EuroIcon className="stroke-emerald-600" size={48} />
+                <EuroIcon className="stroke-primary" size={48} />
                 <div className="flex flex-col gap-2">
                   {event.price !== 0 ? (
                     <>

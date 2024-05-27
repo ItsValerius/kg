@@ -88,7 +88,7 @@ export default function Login({
               Email
             </label>
             <Input
-              className=" mb-6 px-4  py-2 focus-visible:ring-emerald-500/50"
+              className=" mb-6 px-4  py-2 "
               name="email"
               placeholder="you@example.com"
               required
@@ -97,7 +97,7 @@ export default function Login({
               Passwort
             </label>
             <Input
-              className="mb-6 px-4  py-2 focus-visible:ring-emerald-500/50"
+              className="mb-6 px-4  py-2 "
               type="password"
               name="password"
               placeholder="••••••••"
@@ -105,7 +105,7 @@ export default function Login({
             />
             <SubmitButton
               formAction={signIn}
-              className="mb-2 rounded-md bg-emerald-600 px-4 py-2 text-foreground text-white"
+              className="mb-2 rounded-md px-4 py-2 text-foreground text-white"
               pendingText="Logging In..."
             >
               Login

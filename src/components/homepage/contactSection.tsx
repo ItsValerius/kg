@@ -20,12 +20,7 @@ const ContactSection = () => {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                placeholder="Ihr Name"
-                required
-                className="focus-visible:ring-emerald-500/50 "
-              />
+              <Input id="name" placeholder="Ihr Name" required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">E-Mail</Label>
@@ -34,23 +29,14 @@ const ContactSection = () => {
                 placeholder="Ihre E-Mail-Adresse"
                 required
                 type="email"
-                className="focus-visible:ring-emerald-500/50 "
               />
             </div>
           </div>
           <div className="space-y-2">
             <Label htmlFor="message">Nachricht</Label>
-            <Textarea
-              id="message"
-              placeholder="Ihre Nachricht"
-              required
-              className="focus-visible:ring-emerald-500/50 "
-            />
+            <Textarea id="message" placeholder="Ihre Nachricht" required />
           </div>
-          <Button
-            className="w-full bg-emerald-500 hover:bg-emerald-700"
-            type="submit"
-          >
+          <Button className="w-full " type="submit">
             Absenden
           </Button>
         </form>

@@ -24,7 +24,7 @@ const DashboardAside = () => {
                 href="/dashboard"
                 Icon={Home}
                 iconClassName={cn("", {
-                  "stroke-emerald-500": pathname === "/dashboard",
+                  "stroke-primary": pathname === "/dashboard",
                 })}
               />
               <TooltipContent side="right">Dashboard</TooltipContent>
@@ -36,7 +36,7 @@ const DashboardAside = () => {
                 href="/dashboard/aktuelles"
                 Icon={Newspaper}
                 iconClassName={cn("", {
-                  "stroke-emerald-500": pathname.includes(
+                  "stroke-primary": pathname.includes(
                     "/dashboard/aktuelles",
                   ),
                 })}
@@ -50,7 +50,7 @@ const DashboardAside = () => {
                 href="/dashboard/veranstaltungen"
                 Icon={Calendar}
                 iconClassName={cn("", {
-                  "stroke-emerald-500": pathname.includes(
+                  "stroke-primary": pathname.includes(
                     "/dashboard/veranstaltungen",
                   ),
                 })}
@@ -64,7 +64,7 @@ const DashboardAside = () => {
             href="/dashboard"
             Icon={Home}
             iconClassName={cn("", {
-              "stroke-emerald-500": pathname === "/dashboard",
+              "stroke-primary": pathname === "/dashboard",
             })}
           />
 
@@ -72,7 +72,7 @@ const DashboardAside = () => {
             href="/dashboard/aktuelles"
             Icon={Newspaper}
             iconClassName={cn("", {
-              "stroke-emerald-500": pathname.includes("/dashboard/aktuelles"),
+              "stroke-primary": pathname.includes("/dashboard/aktuelles"),
             })}
           />
 
@@ -80,7 +80,7 @@ const DashboardAside = () => {
             href="/dashboard/veranstaltungen"
             Icon={Calendar}
             iconClassName={cn("", {
-              "stroke-emerald-500": pathname.includes(
+              "stroke-primary": pathname.includes(
                 "/dashboard/veranstaltungen",
               ),
             })}
@@ -91,7 +91,7 @@ const DashboardAside = () => {
           href="/dashboard/settings"
           Icon={Settings}
           iconClassName={cn("", {
-            "stroke-emerald-500": pathname === "/dashboard/settings",
+            "stroke-primary": pathname === "/dashboard/settings",
           })}
         />
       </TooltipProvider>

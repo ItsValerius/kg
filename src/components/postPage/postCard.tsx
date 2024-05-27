@@ -21,7 +21,7 @@ import { Badge } from "../ui/badge";
 const PostCard = ({ post }: { post: SelectPostWithAccountAndCategory }) => {
   return (
     <article key={post.id}>
-      <Card className="container space-y-4 p-0 duration-500 hover:shadow-lg hover:shadow-emerald-600/60 sm:space-y-0 ">
+      <Card className="container space-y-4 p-0 duration-500 hover:shadow-md hover:shadow-primary/60 sm:space-y-0 ">
         <CardContent className="grid grid-rows-2 items-start gap-4 p-0 sm:grid-cols-[250px_1fr] sm:grid-rows-1 ">
           <Image
             alt="Article thumbnail"
@@ -76,7 +76,7 @@ const PostCard = ({ post }: { post: SelectPostWithAccountAndCategory }) => {
                 spanClassName=" flex items-center gap-1 pb-1"
               >
                 <Small>Mehr Anzeigen</Small>
-                <ChevronRightCircle size={16} className="stroke-emerald-600" />
+                <ChevronRightCircle size={16} className="stroke-primary" />
               </LinkWithUnderline>
             </div>
           </div>

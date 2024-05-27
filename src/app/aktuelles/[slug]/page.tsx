@@ -47,7 +47,7 @@ const AktuellesDetailsPage = async ({
           href="/aktuelles"
           spanClassName=" flex items-center gap-1 pb-1 w-fit "
         >
-          <ChevronLeftCircle size={16} className="stroke-emerald-600" />
+          <ChevronLeftCircle size={16} className="stroke-primary" />
           <Small className="sm:text-lg">Alle News</Small>
         </LinkWithUnderline>
       </div>

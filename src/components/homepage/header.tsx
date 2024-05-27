@@ -71,7 +71,7 @@ const Header = () => {
             size="icon"
             variant="outline"
           >
-            <MenuIcon className="h-6 w-6 stroke-emerald-600" />
+            <MenuIcon className="h-6 w-6 stroke-primary" />
             <span className="sr-only">Toggle navigation</span>
           </Button>
         </SheetTrigger>
@@ -101,7 +101,7 @@ const Header = () => {
               >
                 <Home
                   className={cn("h-5 w-5 ", {
-                    "stroke-emerald-500": pathname === "/",
+                    "stroke-primary": pathname === "/",
                   })}
                 />
                 Home
@@ -117,7 +117,7 @@ const Header = () => {
               >
                 <Calendar
                   className={cn("h-5 w-5 ", {
-                    "stroke-emerald-500": pathname.includes("/veranstaltungen"),
+                    "stroke-primary": pathname.includes("/veranstaltungen"),
                   })}
                 />
                 Veranstaltungen
@@ -133,7 +133,7 @@ const Header = () => {
               >
                 <Newspaper
                   className={cn("h-5 w-5 ", {
-                    "stroke-emerald-500": pathname.includes("/aktuelles"),
+                    "stroke-primary": pathname.includes("/aktuelles"),
                   })}
                 />
                 Aktuelles
@@ -149,7 +149,7 @@ const Header = () => {
               >
                 <Users2
                   className={cn("h-5 w-5 ", {
-                    "stroke-emerald-500": pathname === "/ueberuns",
+                    "stroke-primary": pathname === "/ueberuns",
                   })}
                 />
                 Über uns
@@ -165,7 +165,7 @@ const Header = () => {
               >
                 <Contact2
                   className={cn("h-5 w-5 ", {
-                    "stroke-emerald-500": pathname === "/kontakt",
+                    "stroke-primary": pathname === "/kontakt",
                   })}
                 />
                 Kontakt

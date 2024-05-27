@@ -14,7 +14,7 @@ const SearchCard = () => {
       <CardContent>
         <form className="mt-4 flex">
           <Input
-            className="flex-1 focus-visible:ring-emerald-500/50"
+            className="flex-1"
             placeholder="Search news..."
             type="text"
           />

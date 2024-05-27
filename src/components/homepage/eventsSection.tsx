@@ -32,7 +32,7 @@ const EventsSection = async () => {
           spanClassName=" flex items-center gap-1 pb-1"
         >
           <Small>Alle Veranstaltungen</Small>
-          <ChevronRightCircle size={16} className="stroke-emerald-600" />
+          <ChevronRightCircle size={16} className="stroke-primary" />
         </LinkWithUnderline>
       </div>
     </section>
