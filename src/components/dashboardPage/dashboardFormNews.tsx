@@ -25,16 +25,7 @@ import { Textarea } from "../ui/textarea";
 
 import { insertNews, uploadImage } from "@/app/dashboard/actions";
 import { createSlug } from "@/lib/utils";
-import { type SelectPost, insertPostSchema } from "@/server/db/schema";
-import { useRouter } from "next/navigation";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { Link } from "lucide-react";
+import { insertPostSchema, type SelectPost } from "@/server/db/schema";
 import { toast } from "sonner";
 
 const MAX_FILE_SIZE = 5000000;
@@ -98,7 +89,6 @@ export const DashboardFormNews = ({
   }
 
   const [content, setContent] = useState<JSONContent>(defaultValue);
-  const router = useRouter();
 
   return (
     <div className="flex flex-col gap-2 overflow-x-scroll lg:overflow-auto">

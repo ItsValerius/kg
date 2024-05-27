@@ -25,12 +25,11 @@ import { Textarea } from "../ui/textarea";
 
 import { insertEvent } from "@/app/dashboard/actions";
 import { cn, createSlug } from "@/lib/utils";
-import { type SelectEvent, insertEventSchema } from "@/server/db/schema";
+import { insertEventSchema, type SelectEvent } from "@/server/db/schema";
 import { CalendarIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { toast } from "sonner";
 export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
   const timeSchema = z.object({ time: z.string().time({ precision: 0 }) });
 
@@ -69,7 +68,6 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
       event?.date.getMinutes().toString() +
       ":00",
   );
-  const router = useRouter();
   return (
     <div className="flex flex-col gap-2 overflow-x-scroll lg:overflow-auto">
       <Form {...form}>
