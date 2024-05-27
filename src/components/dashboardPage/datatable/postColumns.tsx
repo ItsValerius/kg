@@ -87,7 +87,7 @@ export const columns: ColumnDef<SelectPost>[] = [
       );
     },
     cell: ({ row }) => {
-      const createdAt = row.getValue("createdAt") satisfies Date;
+      const createdAt = row.getValue("Erstellt") satisfies Date;
       const formatted = new Intl.DateTimeFormat("de-De", {
         year: "numeric",
         month: "numeric",
