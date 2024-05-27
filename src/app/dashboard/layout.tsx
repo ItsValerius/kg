@@ -1,6 +1,6 @@
 import DashboardAside from "@/components/dashboardPage/dashboardAside";
 import DashboardTableHeader from "@/components/dashboardPage/dashboardTableHeader";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 export default function DashboardLayout({
   children,
 }: {

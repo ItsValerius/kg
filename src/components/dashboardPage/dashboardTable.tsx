@@ -29,17 +29,7 @@ import {
 import { type SelectEvent, type SelectPost } from "@/server/db/schema";
 import { env } from "@/env";
 import Link from "next/link";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+
 import DashboardUpdateStatus from "./dashboardUpdateStatus";
 
 export default function DashboardTable({
@@ -121,7 +111,7 @@ export default function DashboardTable({
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuLabel>Aktionen</DropdownMenuLabel>
                         <DropdownMenuItem asChild>
                           <Link
                             href={
@@ -132,29 +122,21 @@ export default function DashboardTable({
                               event.slug
                             }
                           >
-                            Edit
+                            Bearbeiten
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <AlertDialog>
-                            <AlertDialogTrigger>Delete</AlertDialogTrigger>
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>
-                                  Are you absolutely sure?
-                                </AlertDialogTitle>
-                                <AlertDialogDescription>
-                                  This action cannot be undone. This will
-                                  permanently delete your account and remove
-                                  your data from our servers.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction>Continue</AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
+                          <Link
+                            href={
+                              "/dashboard" +
+                              (events ? "/veranstaltungen" : "/aktuelles") +
+                              "/delete" +
+                              "/" +
+                              event.slug
+                            }
+                          >
+                            Löschen
+                          </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <DashboardUpdateStatus data={event} />
@@ -224,32 +206,19 @@ export default function DashboardTable({
                             Edit
                           </Link>
                         </DropdownMenuItem>
-                        <AlertDialog>
-                          <DropdownMenuItem>
-                            <AlertDialogTrigger
-                              className="hover:cursor-default"
-                              asChild
-                            >
-                              <Link href={"#"}>Delete</Link>
-                            </AlertDialogTrigger>
-                          </DropdownMenuItem>
-                          <AlertDialogContent>
-                            <AlertDialogHeader>
-                              <AlertDialogTitle>
-                                Are you absolutely sure?
-                              </AlertDialogTitle>
-                              <AlertDialogDescription>
-                                This action cannot be undone. This will
-                                permanently delete your account and remove your
-                                data from our servers.
-                              </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                              <AlertDialogCancel>Cancel</AlertDialogCancel>
-                              <AlertDialogAction>Continue</AlertDialogAction>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialog>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href={
+                              "/dashboard" +
+                              (events ? "/veranstaltungen" : "/aktuelles") +
+                              "/delete" + 
+                              '/' + 
+                              post.slug
+                            }
+                          >
+                            Löschen
+                          </Link>
+                        </DropdownMenuItem>
                         <DropdownMenuItem>
                           <DashboardUpdateStatus data={post} />
                         </DropdownMenuItem>
