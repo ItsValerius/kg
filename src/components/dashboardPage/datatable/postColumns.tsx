@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { SelectPost } from "@/server/db/schema";
-import type{ ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import events from "events";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
@@ -63,10 +63,17 @@ export const columns: ColumnDef<SelectPost>[] = [
           : status === "active"
             ? "default"
             : "destructive";
-      return <Badge variant={variant}>{status}</Badge>;
+      const formatted =
+        status === "draft"
+          ? "Entwurf"
+          : status === "active"
+            ? "Aktiv"
+            : "Inaktiv";
+      return <Badge variant={variant}>{formatted}</Badge>;
     },
   },
   {
+    id: "Erstellt",
     accessorKey: "createdAt",
     header: ({ column }) => {
       return (

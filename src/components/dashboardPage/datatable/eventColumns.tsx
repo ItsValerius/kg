@@ -10,8 +10,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type{ SelectEvent } from "@/server/db/schema";
-import type{ ColumnDef } from "@tanstack/react-table";
+import type { SelectEvent } from "@/server/db/schema";
+import type { ColumnDef } from "@tanstack/react-table";
 import events from "events";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
@@ -63,7 +63,13 @@ export const columns: ColumnDef<SelectEvent>[] = [
           : status === "active"
             ? "default"
             : "destructive";
-      return <Badge variant={variant}>{status}</Badge>;
+      const formatted =
+        status === "draft"
+          ? "Entwurf"
+          : status === "active"
+            ? "Aktiv"
+            : "Inaktiv";
+      return <Badge variant={variant}>{formatted}</Badge>;
     },
   },
   {
@@ -81,7 +87,7 @@ export const columns: ColumnDef<SelectEvent>[] = [
     },
   },
   {
-    id: "createdAt",
+    id: "Erstellt",
     accessorKey: "createdAt",
     header: ({ column }) => {
       return (
