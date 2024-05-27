@@ -1,8 +1,6 @@
-import { MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,13 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Table,
   TableBody,
   TableCell,
@@ -26,11 +17,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { type SelectEvent, type SelectPost } from "@/server/db/schema";
 import { env } from "@/env";
-import Link from "next/link";
+import { type SelectEvent, type SelectPost } from "@/server/db/schema";
 
-import DashboardUpdateStatus from "./dashboardUpdateStatus";
 
 export default function DashboardTable({
   events,
@@ -98,52 +87,6 @@ export default function DashboardTable({
                       day: "numeric",
                     }).format(event.createdAt)}
                   </TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          aria-haspopup="true"
-                          size="icon"
-                          variant="ghost"
-                        >
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Aktionen</DropdownMenuLabel>
-                        <DropdownMenuItem asChild>
-                          <Link
-                            href={
-                              "/dashboard" +
-                              (events ? "/veranstaltungen" : "/aktuelles") +
-                              "/edit" +
-                              "/" +
-                              event.slug
-                            }
-                          >
-                            Bearbeiten
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <Link
-                            href={
-                              "/dashboard" +
-                              (events ? "/veranstaltungen" : "/aktuelles") +
-                              "/delete" +
-                              "/" +
-                              event.slug
-                            }
-                          >
-                            Löschen
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <DashboardUpdateStatus data={event} />
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
                 </TableRow>
               );
             })}
@@ -178,52 +121,6 @@ export default function DashboardTable({
                       month: "numeric",
                       day: "numeric",
                     }).format(post.createdAt)}
-                  </TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          aria-haspopup="true"
-                          size="icon"
-                          variant="ghost"
-                        >
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem asChild>
-                          <Link
-                            href={
-                              "/dashboard" +
-                              (events ? "/veranstaltungen" : "/aktuelles") +
-                              "/edit" +
-                              "/" +
-                              post.slug
-                            }
-                          >
-                            Edit
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <Link
-                            href={
-                              "/dashboard" +
-                              (events ? "/veranstaltungen" : "/aktuelles") +
-                              "/delete" + 
-                              '/' + 
-                              post.slug
-                            }
-                          >
-                            Löschen
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <DashboardUpdateStatus data={post} />
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
                   </TableCell>
                 </TableRow>
               );

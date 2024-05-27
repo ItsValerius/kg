@@ -1,5 +1,6 @@
 import DashboardDetailsHeader from "@/components/dashboardPage/dashboardDetailsHeader";
-import DashboardTable from "@/components/dashboardPage/dashboardTable";
+import { DataTable } from "@/components/dashboardPage/datatable/dataTable";
+import { columns } from "@/components/dashboardPage/datatable/postColumns";
 import { db } from "@/server/db";
 
 import type { Metadata } from "next";
@@ -14,7 +15,7 @@ const AktuellesDashboardPage = async () => {
     <main className="w-full ">
       <div className="flex flex-col gap-4 px-4 py-2 sm:p-4">
         <DashboardDetailsHeader type="news" />
-        <DashboardTable posts={posts} />
+        <DataTable data={posts} columns={columns} />
       </div>
     </main>
   );

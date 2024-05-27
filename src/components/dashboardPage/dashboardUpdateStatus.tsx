@@ -15,6 +15,7 @@ const DashboardUpdateStatus = ({
 
   return (
     <Button
+      variant={data.status === "active" ? "destructive" : "default"}
       onClick={async () => {
         await updateStatus(
           data.id,
