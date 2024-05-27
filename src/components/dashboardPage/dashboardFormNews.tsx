@@ -27,6 +27,15 @@ import { insertNews, uploadImage } from "@/app/dashboard/actions";
 import { createSlug } from "@/lib/utils";
 import { type SelectPost, insertPostSchema } from "@/server/db/schema";
 import { useRouter } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Link } from "lucide-react";
+import { toast } from "sonner";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -53,13 +62,14 @@ export const DashboardFormNews = ({
       .refine(
         (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
         "Only these types are allowed .jpg, .jpeg, .png and .webp",
-      ),
+      )
+      .optional(),
   });
   const formSchema = insertPostSchema.merge(fileSchema);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ...post,
+      ...(post ?? { title: "" }),
     },
   });
 
@@ -70,11 +80,21 @@ export const DashboardFormNews = ({
 
     const { title, content, teaser, slug, userId } = values;
     console.log({ title, content, teaser });
-    const formData = new FormData();
-    formData.append("file", values.file);
-    formData.append("name", slug);
-    await uploadImage(formData);
-    await insertNews({ title, content, teaser, slug, userId });
+    try {
+      if (values.file) {
+        const formData = new FormData();
+        formData.append("file", values.file);
+        formData.append("name", slug);
+        await uploadImage(formData);
+      }
+      await insertNews({ title, content, teaser, slug, userId });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+    toast("Artikel wurde erstellt.", {
+      description: "Der Artikel " + title + " wurde erfolgreich erstellt.",
+    });
   }
 
   const [content, setContent] = useState<JSONContent>(defaultValue);
@@ -89,13 +109,11 @@ export const DashboardFormNews = ({
             form.setValue("userId", userId);
             form.setValue("slug", createSlug(form.getValues("title")));
             await form.handleSubmit(onSubmit)(e);
-
-            router.push("/dashboard/aktuelles/erstellt");
           }}
           className="flex grid-cols-2 flex-col gap-2 p-4 md:grid "
           id="dashboardForm"
         >
-          <div className="flex flex-col gap-1 space-y-0">
+          <div className="flex flex-col justify-between gap-1 space-y-0">
             <FormField
               control={form.control}
               name="title"
@@ -157,12 +175,9 @@ export const DashboardFormNews = ({
             )}
           />
         </form>
+        <Editor initialValue={content} onChange={setContent} />
+        <Button type="submit">Submit</Button>
       </Form>
-
-      <Editor initialValue={content} onChange={setContent} />
-      <Button form="dashboardForm" type="submit">
-        Submit
-      </Button>
     </div>
   );
 };

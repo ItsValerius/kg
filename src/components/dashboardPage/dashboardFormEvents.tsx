@@ -30,6 +30,7 @@ import { CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { toast } from "sonner";
 export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
   const timeSchema = z.object({ time: z.string().time({ precision: 0 }) });
 
@@ -37,7 +38,7 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ...event,
+      ...(event ?? { name: "" }),
     },
   });
 
@@ -52,7 +53,9 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
     } catch (err) {
       return;
     }
-    router.push("/dashboard/veranstaltungen/erstellt");
+    toast("Event wurde erstellt.", {
+      description: "Das Event " + values.name + " wurde erfolgreich erstellt.",
+    });
     // const formData = new FormData();
     // formData.append("file", values.file);
     // await uploadImage(formData);
@@ -78,7 +81,6 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
             console.log(time);
 
             await form.handleSubmit(onSubmit)(e);
-            // router.push("/dashboard/veranstaltungen/erstellt");
           }}
           className="flex flex-col gap-2 p-4 md:grid md:grid-cols-3 "
           id="dashboardForm"
