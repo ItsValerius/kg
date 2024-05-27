@@ -1,38 +1,19 @@
 import { H1 } from "@/components/typography/h1";
 import { H2 } from "@/components/typography/h2";
-import { cn } from "@/lib/utils";
-import { getImageProps } from "next/image";
+import Image from "next/image";
 
 const HeroSection = () => {
-  function getBackgroundImage(srcSet = "") {
-    const imageSet = srcSet
-      .split(", ")
-      .map((str) => {
-        const [url, dpi] = str.split(" ");
-        return `url("${url}") ${dpi}`;
-      })
-      .join(", ");
-    return `image-set(${imageSet})`;
-  }
-
-  const {
-    props: { srcSet },
-  } = getImageProps({
-    alt: "",
-    width: 1080,
-    height: 256,
-    src: "https://knallkoepp-golkrath.de/s/img/emotionheader.jpg",
-  });
-  const backgroundImage = getBackgroundImage(srcSet);
-  const style = { backgroundSize: "cover", backgroundImage };
-
   return (
-    <section
-      style={style}
-      className={cn(
-        "bg-fill flex min-h-64 flex-col items-center justify-center bg-center px-4 [border-image:linear-gradient(hsl(130_80%_10%_/_0.5),_hsl(130_50%_80%_/_0.5))_fill_1] md:px-6 lg:bg-cover lg:bg-top",
-      )}
-    >
+    <section className="flex min-h-64 flex-col items-center justify-center px-4 [border-image:linear-gradient(hsl(130_80%_10%_/_0.5),_hsl(130_50%_80%_/_0.5))_fill_1] md:px-6">
+      <div className="fixed -z-10 h-64 w-full ">
+        <Image
+          src={"https://knallkoepp-golkrath.de/s/img/emotionheader.jpg"}
+          fill
+          alt="Hintergrundbild"
+          className="object-fill object-center lg:object-cover lg:object-top"
+          sizes="100vw"
+        />
+      </div>
       <div className="max-w-3xl space-y-4 text-center text-white lg:p-4 ">
         <H1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl ">
           Feiern Sie mit uns!
