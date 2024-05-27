@@ -21,8 +21,13 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Input } from "../ui/input";
+import { SelectAccount } from "@/server/db/schema";
 
-const DashboardTableHeader = () => {
+const DashboardTableHeader = ({
+  currentAccount,
+}: {
+  currentAccount: SelectAccount;
+}) => {
   const pathname = usePathname();
   const pathnames = pathname.split("/").filter((name) => !!name);
 
@@ -75,7 +80,7 @@ const DashboardTableHeader = () => {
             className="overflow-hidden rounded-full"
           >
             <Image
-              src="/placeholder-user.jpg"
+              src={currentAccount.imageUrl}
               width={36}
               height={36}
               alt="Avatar"

@@ -2,13 +2,12 @@
 import { cn } from "@/lib/utils";
 import { Calendar, Home, Newspaper, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
-import React from "react";
 import LinkWithIcon from "../Links/LinkWithIcon";
 import {
+  Tooltip,
+  TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-  TooltipContent,
-  Tooltip,
 } from "../ui/tooltip";
 
 const DashboardAside = () => {
@@ -36,9 +35,7 @@ const DashboardAside = () => {
                 href="/dashboard/aktuelles"
                 Icon={Newspaper}
                 iconClassName={cn("", {
-                  "stroke-primary": pathname.includes(
-                    "/dashboard/aktuelles",
-                  ),
+                  "stroke-primary": pathname.includes("/dashboard/aktuelles"),
                 })}
               />
             </TooltipTrigger>
@@ -80,9 +77,7 @@ const DashboardAside = () => {
             href="/dashboard/veranstaltungen"
             Icon={Calendar}
             iconClassName={cn("", {
-              "stroke-primary": pathname.includes(
-                "/dashboard/veranstaltungen",
-              ),
+              "stroke-primary": pathname.includes("/dashboard/veranstaltungen"),
             })}
           />
         </nav>
