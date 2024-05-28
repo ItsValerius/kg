@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Calendar, Home, Newspaper, Settings } from "lucide-react";
+import { Calendar, Home, Newspaper } from "lucide-react";
 import { usePathname } from "next/navigation";
 import LinkWithIcon from "../Links/LinkWithIcon";
 import {
