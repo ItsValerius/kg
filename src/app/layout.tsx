@@ -5,10 +5,14 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { env } from "@/env";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-
+  metadataBase:
+    env.NODE_ENV === "production"
+      ? new URL("https://" + env.VERCEL_PROJECT_PRODUCTION_URL)
+      : new URL("http://localhost:300"),
   title: {
     default: "KG Knallköpp Golkrath",
     template: "KG Knallköpp Golkrath | %s",
