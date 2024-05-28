@@ -76,14 +76,16 @@ export const updateStatus = async (
       .update(postsTable)
       .set({ status: status })
       .where(eq(postsTable.id, id));
-      revalidatePath("/aktuelles");
-      revalidatePath("/dashboard/aktuelles");
+    revalidatePath("/aktuelles");
+    revalidatePath("/veranstaltungen/[slug]", "page");
+    revalidatePath("/dashboard/aktuelles");
     return;
   }
   await db
     .update(eventsTable)
     .set({ status: status })
     .where(eq(eventsTable.id, id));
-    revalidatePath("/veranstaltungen");
-    revalidatePath("/dashboard/veranstaltungen");
+  revalidatePath("/veranstaltungen");
+  revalidatePath("/veranstaltungen/[slug]", "page");
+  revalidatePath("/dashboard/veranstaltungen");
 };
