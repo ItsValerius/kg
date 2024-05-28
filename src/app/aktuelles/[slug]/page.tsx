@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { env } from "@/env";
 import { db } from "@/server/db";
 import { postsTable } from "@/server/db/schema";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { ChevronLeftCircle } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -35,7 +35,10 @@ const AktuellesDetailsPage = async ({
   params: { slug: string };
 }) => {
   const post = await db.query.postsTable.findFirst({
-    where: eq(postsTable.slug, params.slug),
+    where: and(
+      eq(postsTable.slug, params.slug),
+      eq(postsTable.status, "active"),
+    ),
   });
 
   if (!post) return notFound();

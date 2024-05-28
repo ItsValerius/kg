@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/server/db";
 import { eventsTable } from "@/server/db/schema";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { Calendar, ChevronLeftCircle, Clock, EuroIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 
@@ -17,7 +17,10 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const event = await db.query.eventsTable.findFirst({
-    where: eq(eventsTable.slug, params.slug),
+    where: and(
+      eq(eventsTable.slug, params.slug),
+      eq(eventsTable.status, "active"),
+    ),
   });
   return {
     title: event?.name,
@@ -26,7 +29,10 @@ export async function generateMetadata({ params }: Props) {
 
 const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
   const event = await db.query.eventsTable.findFirst({
-    where: eq(eventsTable.slug, params.slug),
+    where: and(
+      eq(eventsTable.slug, params.slug),
+      eq(eventsTable.status, "active"),
+    ),
   });
 
   if (!event) return notFound();
