@@ -10,6 +10,7 @@ import { eventsTable } from "@/server/db/schema";
 import { and, eq } from "drizzle-orm";
 import { Calendar, ChevronLeftCircle, Clock, EuroIcon } from "lucide-react";
 import { notFound } from "next/navigation";
+import parse from "html-react-parser";
 
 type Props = {
   params: { slug: string };
@@ -129,10 +130,9 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
       <Separator className="mx-auto my-4 max-w-5xl" />
       <section className="px-2 py-6 md:px-4">
         <div className="mx-auto flex max-w-5xl justify-center">
-          <CardContent
-            dangerouslySetInnerHTML={{ __html: event.description }}
-            className="prose"
-          ></CardContent>
+          <CardContent className="prose">
+            {parse(event.description)}
+          </CardContent>
         </div>
       </section>
     </main>

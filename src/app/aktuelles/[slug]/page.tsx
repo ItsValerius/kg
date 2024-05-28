@@ -9,7 +9,7 @@ import { and, eq } from "drizzle-orm";
 import { ChevronLeftCircle } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-
+import parse from "html-react-parser";
 export async function generateStaticParams() {
   const posts = await db.query.postsTable.findMany();
 
@@ -68,10 +68,7 @@ const AktuellesDetailsPage = async ({
               sizes="(max-width: 1024px) 100vw, (max-width: 1920px) 50vw, 33vw"
             />
           </CardContent>
-          <CardContent
-            dangerouslySetInnerHTML={{ __html: post.content }}
-            className="prose"
-          ></CardContent>
+          <CardContent className="prose">{parse(post.content)}</CardContent>
         </Card>
       </section>
     </main>
