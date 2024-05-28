@@ -19,7 +19,7 @@ import { defaultValue } from "@/components/editor/defaultValue";
 import { type JSONContent } from "novel";
 import { useState } from "react";
 
-import { generateHTML } from "@tiptap/html";
+import { generateHTML, generateJSON } from "@tiptap/html";
 import { StarterKit } from "novel/extensions";
 import { Textarea } from "../ui/textarea";
 
@@ -88,7 +88,9 @@ export const DashboardFormNews = ({
     });
   }
 
-  const [content, setContent] = useState<JSONContent>(defaultValue);
+  const [content, setContent] = useState<JSONContent>(
+    post ? generateJSON(post.content, [StarterKit]) : defaultValue,
+  );
 
   return (
     <div className="flex flex-col gap-2 overflow-x-scroll lg:overflow-auto">

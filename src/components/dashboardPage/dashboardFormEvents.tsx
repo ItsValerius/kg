@@ -19,7 +19,7 @@ import { defaultValue } from "@/components/editor/defaultValue";
 import { type JSONContent } from "novel";
 import { useState } from "react";
 
-import { generateHTML } from "@tiptap/html";
+import { generateHTML, generateJSON } from "@tiptap/html";
 import { StarterKit } from "novel/extensions";
 import { Textarea } from "../ui/textarea";
 
@@ -60,7 +60,9 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
     // await uploadImage(formData);
   }
 
-  const [content, setContent] = useState<JSONContent>(defaultValue);
+  const [content, setContent] = useState<JSONContent>(
+    event ? generateJSON(event.description, [StarterKit]) : defaultValue,
+  );
   const [price, setPrice] = useState<number>(event ? event.price / 100 : 0);
   const [time, setTime] = useState<string>(
     event?.date.getHours().toString() +
