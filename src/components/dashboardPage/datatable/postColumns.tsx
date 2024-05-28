@@ -42,6 +42,7 @@ export const columns: ColumnDef<SelectPost>[] = [
     enableHiding: false,
   },
   {
+    id:'Titel',
     accessorKey: "title",
     header: "Titel",
   },
@@ -49,9 +50,10 @@ export const columns: ColumnDef<SelectPost>[] = [
   {
     accessorKey: "content",
     header: "Inhalt",
+    id:'Inhalt',
     cell: ({ row }) => {
       return (
-        <div className="line-clamp-3">{parse(row.getValue("content"))}</div>
+        <div className="line-clamp-3">{parse(row.getValue("Inhalt"))}</div>
       );
     },
   },

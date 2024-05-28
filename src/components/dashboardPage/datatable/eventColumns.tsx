@@ -49,9 +49,10 @@ export const columns: ColumnDef<SelectEvent>[] = [
   {
     accessorKey: "description",
     header: "Beschreibung",
+    id: "Beschreibung",
     cell: ({ row }) => {
       return (
-        <div className="line-clamp-3">{parse(row.getValue("description"))}</div>
+        <div className="line-clamp-3">{parse(row.getValue("Beschreibung"))}</div>
       );
     },
   },
@@ -84,11 +85,12 @@ export const columns: ColumnDef<SelectEvent>[] = [
   },
   {
     accessorKey: "price",
+    id:'Preis',
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title="Preis" />;
     },
     cell: ({ row }) => {
-      const price = parseFloat(row.getValue("price"));
+      const price = parseFloat(row.getValue("Preis"));
       const formatted = new Intl.NumberFormat("de-DE", {
         style: "currency",
         currency: "EUR",
