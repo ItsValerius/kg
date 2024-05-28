@@ -11,7 +11,7 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-    VERCEL_PROJECT_PRODUCTION_URL: z.string().url(),
+    VERCEL_PROJECT_PRODUCTION_URL: z.string(),
   },
 
   /**
