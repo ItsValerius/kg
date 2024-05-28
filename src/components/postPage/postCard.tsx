@@ -39,7 +39,7 @@ const PostCard = ({ post }: { post: SelectPostWithAccountAndCategory }) => {
                   {post.teaser}
                 </P>
               </div>
-              <div className=" flex gap-2  self-start">
+              <div className="flex gap-2 self-start">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>

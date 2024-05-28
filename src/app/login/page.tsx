@@ -27,7 +27,7 @@ export default function Login({
     });
 
     if (error) {
-      return redirect("/login?message=Could not authenticate user");
+      return redirect("/login?message=Login Fehlgeschlagen");
     }
 
     return redirect("/dashboard");
