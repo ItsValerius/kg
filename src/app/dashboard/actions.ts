@@ -77,7 +77,6 @@ export const updateStatus = async (
       .set({ status: status })
       .where(eq(postsTable.id, id));
     revalidatePath("/aktuelles");
-    revalidatePath("/aktuelles/[slug]", "page");
     revalidatePath("/dashboard/aktuelles");
     return;
   }
@@ -86,6 +85,5 @@ export const updateStatus = async (
     .set({ status: status })
     .where(eq(eventsTable.id, id));
   revalidatePath("/veranstaltungen");
-  revalidatePath("/veranstaltungen/[slug]", "page");
   revalidatePath("/dashboard/veranstaltungen");
 };
