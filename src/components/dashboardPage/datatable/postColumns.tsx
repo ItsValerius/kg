@@ -12,10 +12,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import type { SelectPost } from "@/server/db/schema";
 import type { ColumnDef } from "@tanstack/react-table";
-import events from "events";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import parse from "html-react-parser";
+import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import DashboardUpdateStatus from "../dashboardUpdateStatus";
+import { DataTableColumnHeader } from "./dataTableHeader";
+
 export const columns: ColumnDef<SelectPost>[] = [
   {
     id: "select",
@@ -47,6 +49,11 @@ export const columns: ColumnDef<SelectPost>[] = [
   {
     accessorKey: "content",
     header: "Inhalt",
+    cell: ({ row }) => {
+      return (
+        <div className="line-clamp-3">{parse(row.getValue("content"))}</div>
+      );
+    },
   },
   {
     accessorKey: "teaser",
@@ -55,6 +62,9 @@ export const columns: ColumnDef<SelectPost>[] = [
   {
     accessorKey: "status",
     header: "Status",
+    filterFn: (row, id, value:SelectPost["status"]) => {
+      return value.includes(row.getValue(id)) ;
+    },
     cell: ({ row }) => {
       const status = row.getValue("status") satisfies SelectPost["status"];
       const variant =
@@ -76,15 +86,7 @@ export const columns: ColumnDef<SelectPost>[] = [
     id: "Erstellt",
     accessorKey: "createdAt",
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Erstellt
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Erstellt" />;
     },
     cell: ({ row }) => {
       const createdAt = row.getValue("Erstellt") satisfies Date;
@@ -113,28 +115,12 @@ export const columns: ColumnDef<SelectPost>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Aktionen</DropdownMenuLabel>
             <DropdownMenuItem asChild>
-              <Link
-                href={
-                  "/dashboard" +
-                  (events ? "/veranstaltungen" : "/aktuelles") +
-                  "/edit" +
-                  "/" +
-                  event.slug
-                }
-              >
+              <Link href={"/dashboard/aktuelles/edit/" + event.slug}>
                 Bearbeiten
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link
-                href={
-                  "/dashboard" +
-                  (events ? "/veranstaltungen" : "/aktuelles") +
-                  "/delete" +
-                  "/" +
-                  event.slug
-                }
-              >
+              <Link href={"/dashboard/aktuelles/delete/" + event.slug}>
                 Löschen
               </Link>
             </DropdownMenuItem>
