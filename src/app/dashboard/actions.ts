@@ -47,12 +47,14 @@ export const insertEvent = async (values: InsertEvent) => {
       .update(eventsTable)
       .set({ ...values, price: priceInCents })
       .where(eq(eventsTable.id, values.id));
+    revalidatePath("/");
     revalidatePath("/veranstaltungen");
 
     return;
   }
 
   await db.insert(eventsTable).values({ ...values, price: priceInCents });
+  revalidatePath("/");
   revalidatePath("/veranstaltungen");
   return;
 };
@@ -62,6 +64,7 @@ export const insertNews = async (values: InsertPost) => {
     await db.update(postsTable).set(values).where(eq(postsTable.id, values.id));
   }
   await db.insert(postsTable).values(values);
+  revalidatePath("/");
   revalidatePath("/aktuelles");
   return;
 };
@@ -76,6 +79,7 @@ export const updateStatus = async (
       .update(postsTable)
       .set({ status: status })
       .where(eq(postsTable.id, id));
+    revalidatePath("/");
     revalidatePath("/aktuelles");
     revalidatePath("/dashboard/aktuelles");
     return;
@@ -84,6 +88,7 @@ export const updateStatus = async (
     .update(eventsTable)
     .set({ status: status })
     .where(eq(eventsTable.id, id));
+  revalidatePath("/");
   revalidatePath("/veranstaltungen");
   revalidatePath("/dashboard/veranstaltungen");
 };
