@@ -80,7 +80,6 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
             form.setValue("slug", createSlug(form.getValues("name")));
             form.setValue("time", time);
             form.setValue("price", price);
-            console.log(time);
 
             await form.handleSubmit(onSubmit)(e);
           }}
