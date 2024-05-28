@@ -14,7 +14,7 @@ const DashboardAside = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="flex w-full flex-row justify-between border-b p-4 sm:w-14 sm:flex-col sm:border-r">
+    <aside className="flex w-full flex-row  border-b p-4 sm:w-14 sm:flex-col sm:border-r">
       <TooltipProvider>
         <nav className="hidden flex-row gap-4 sm:flex sm:flex-col">
           <Tooltip>
@@ -81,14 +81,6 @@ const DashboardAside = () => {
             })}
           />
         </nav>
-
-        <LinkWithIcon
-          href="/dashboard/settings"
-          Icon={Settings}
-          iconClassName={cn("", {
-            "stroke-primary": pathname === "/dashboard/settings",
-          })}
-        />
       </TooltipProvider>
     </aside>
   );

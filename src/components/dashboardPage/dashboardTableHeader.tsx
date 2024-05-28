@@ -1,4 +1,5 @@
 "use client";
+import { signOut } from "@/app/dashboard/actions";
 import type { SelectAccount } from "@/server/db/schema";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,7 +31,7 @@ const DashboardTableHeader = ({
   const pathnames = pathname.split("/").filter((name) => !!name);
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-2 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 justify-between">
+    <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-4 border-b bg-background px-4 py-2 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
       <Breadcrumb className="hidden md:flex">
         <BreadcrumbList>
           {pathnames.map((name, i) => {
@@ -85,7 +86,11 @@ const DashboardTableHeader = ({
           <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Button variant={"ghost"} onClick={async () => await signOut()}>
+              Logout
+            </Button>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
