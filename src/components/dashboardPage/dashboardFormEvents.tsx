@@ -47,6 +47,7 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
     const [hours, minutes, _seconds] = values.time.split(":");
     values.date.setHours(Number(hours));
     values.date.setMinutes(Number(minutes));
+    
     try {
       await insertEvent(values);
     } catch (err) {
@@ -78,6 +79,7 @@ export const DashboardFormEvents = ({ event }: { event?: SelectEvent }) => {
             form.setValue("description", generateHTML(content, [StarterKit]));
             form.setValue("slug", createSlug(form.getValues("name")));
             form.setValue("time", time);
+            form.setValue("price", price);
             console.log(time);
 
             await form.handleSubmit(onSubmit)(e);
