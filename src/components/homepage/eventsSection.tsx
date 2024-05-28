@@ -6,10 +6,6 @@ import EventCard from "../eventPage/eventCard";
 import { H2 } from "../typography/h2";
 import Small from "../typography/small";
 const EventsSection = async () => {
-  await sleep(5000);
-  function sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
   const events = await getActiveEvents(3);
   if (events.length < 1) {
     return;

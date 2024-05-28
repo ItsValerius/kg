@@ -7,10 +7,6 @@ import P from "../typography/p";
 import Small from "../typography/small";
 
 const NewsSection = async () => {
-  await sleep(5000);
-  function sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
   const posts = await getActivePosts(3);
   return (
     <section className="px-4 py-12 md:px-6">
