@@ -77,7 +77,7 @@ export const updateStatus = async (
       .set({ status: status })
       .where(eq(postsTable.id, id));
     revalidatePath("/aktuelles");
-    revalidatePath("/veranstaltungen/[slug]", "page");
+    revalidatePath("/aktuelles/[slug]", "page");
     revalidatePath("/dashboard/aktuelles");
     return;
   }
