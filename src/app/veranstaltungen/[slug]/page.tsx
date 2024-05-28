@@ -92,6 +92,7 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
                     {new Intl.DateTimeFormat("de-DE", {
                       hour: "2-digit",
                       minute: "2-digit",
+                      timeZone:"Europe/Berlin"
                     }).format(event.date)}
                   </H4>
                   <Muted className="text-center ">Einlass</Muted>
