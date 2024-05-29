@@ -1,15 +1,15 @@
 import LinkWithUnderline from "@/components/Links/LinkWithUnderline";
 import { H1 } from "@/components/typography/h1";
 import Small from "@/components/typography/small";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { env } from "@/env";
 import { db } from "@/server/db";
 import { postsTable } from "@/server/db/schema";
 import { and, eq } from "drizzle-orm";
+import parse from "html-react-parser";
 import { ChevronLeftCircle } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import parse from "html-react-parser";
 export async function generateStaticParams() {
   const posts = await db.query.postsTable.findMany();
 
