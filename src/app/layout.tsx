@@ -6,6 +6,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { env } from "@/env";
+import { ThemeProvider } from "@/components/theme-provider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -33,11 +35,18 @@ export default function RootLayout({
           " grid min-h-screen grid-rows-[64px_1fr_64px] overflow-y-scroll"
         }
       >
-        <Header />
-        {children}
-        <Footer />
-        <Analytics />
-        <SpeedInsights />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          {children}
+          <Footer />
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );

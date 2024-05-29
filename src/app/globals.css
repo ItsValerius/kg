@@ -47,4 +47,19 @@
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
   }
+
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    html {
+      @apply scroll-smooth;
+    }
+    body {
+      @apply bg-background text-foreground;
+      /* font-feature-settings: "rlig" 1, "calt" 1; */
+      font-synthesis-weight: none;
+      text-rendering: optimizeLegibility;
+    }
+  }
 }

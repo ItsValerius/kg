@@ -1,6 +1,7 @@
 "use client";
 import LinkWithUnderline from "@/components/Links/LinkWithUnderline";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   Calendar,
   Contact2,
@@ -11,14 +12,13 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet";
-import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const Header = () => {
   const pathname = usePathname();
   return (
-    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b bg-white px-4 shadow-sm md:px-6 ">
+    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background px-4 shadow-sm md:px-6 ">
       <Link className="flex items-center space-x-2" href="/">
         <Image
           src="https://knallkoepp-golkrath.de/s/misc/logo.png"
@@ -64,13 +64,10 @@ const Header = () => {
           Kontakt
         </LinkWithUnderline>
       </nav>
+
       <Sheet>
         <SheetTrigger asChild>
-          <Button
-            className=" text-white md:hidden"
-            size="icon"
-            variant="outline"
-          >
+          <Button className="  md:hidden" size="icon" variant="outline">
             <MenuIcon className="h-6 w-6 stroke-primary" />
             <span className="sr-only">Toggle navigation</span>
           </Button>

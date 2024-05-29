@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <section className="relative flex min-h-64 flex-col items-center justify-center px-4 [border-image:linear-gradient(hsl(130_80%_10%_/_0.5),_hsl(130_50%_80%_/_0.5))_fill_1] md:px-6">
+    <section className="relative flex min-h-64 flex-col items-center justify-center px-4 dark:[border-image:linear-gradient(hsl(230_80%_10%_/_0.5),_hsl(230_50%_80%_/_0.5))_fill_1] [border-image:linear-gradient(hsl(130_80%_10%_/_0.5),_hsl(130_50%_80%_/_0.5))_fill_1] md:px-6">
       <div className="-z-10 h-full w-full ">
         <Image
           src={"https://knallkoepp-golkrath.de/s/img/emotionheader.jpg"}

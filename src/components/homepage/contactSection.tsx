@@ -11,7 +11,7 @@ const ContactSection = () => {
       <div className="mx-auto max-w-3xl space-y-8">
         <div className="space-y-2 text-center">
           <H2 className="text-3xl font-bold">Kontaktieren Sie uns</H2>
-          <P className="text-slate-700">
+          <P className="text-foreground">
             Haben Sie Fragen oder möchten Sie mehr über unseren Verein erfahren?
             Schreiben Sie uns!
           </P>

@@ -14,7 +14,7 @@ const EventCard = ({ event }: { event: SelectEvent }) => {
     >
       <CardContent className="grid h-full grid-rows-[32px_1fr_20px] gap-2 space-y-2">
         <H3 className="text-xl font-bold">{event.name}</H3>
-        <P className="text-slate-700">{event.teaser}</P>
+        <P className="text-muted-foreground">{event.teaser}</P>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <CalendarDaysIcon className="h-5 w-5 stroke-primary" />

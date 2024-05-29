@@ -1,8 +1,9 @@
 import Link from "next/link";
 import P from "../typography/p";
+import { ModeToggle } from "../mode-toggle";
 const Footer = () => {
   return (
-    <footer className="flex h-24 flex-col items-center justify-between border-t bg-white px-4 py-6 text-black shadow-inner dark:bg-gray-950 dark:text-gray-50 sm:h-16 sm:flex-row md:px-6">
+    <footer className="flex h-24 flex-col items-center justify-between border-t  px-4 py-6 text-black shadow-inner dark:bg-gray-950 dark:text-gray-50 sm:h-16 sm:flex-row md:px-6">
       <P className="text-sm">
         © 2024 KG Knallköpp Golkrath e.V. All rights reserved.
       </P>
@@ -13,6 +14,7 @@ const Footer = () => {
         <Link className="text-sm hover:underline" href="/datenschutzerklaerung">
           Datenschutzerklärung
         </Link>
+        <ModeToggle />
       </div>
     </footer>
   );
