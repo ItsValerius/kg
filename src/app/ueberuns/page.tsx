@@ -13,7 +13,7 @@ const UeberunsPage = () => {
       <div className="mx-auto max-w-5xl space-y-8">
         <div className="space-y-2 text-center">
           <H2 className="text-3xl font-bold">Über unseren Verein</H2>
-          <P className="text-slate-700">
+          <P className="text-foreground">
             Erfahren Sie mehr über die Geschichte und Tradition unseres
             Karnevalsvereins.
           </P>
@@ -29,13 +29,13 @@ const UeberunsPage = () => {
             />
           </div>
           <div className="space-y-4">
-            <P className="text-slate-700">
+            <P className="text-foreground">
               Unser Karnevalsverein wurde 1972 gegründet und hat seitdem eine
               lange Tradition in der Region. Wir sind stolz darauf, die
               Karnevalskultur in unserer Gemeinschaft zu pflegen und
               weiterzugeben.
             </P>
-            <P className="text-slate-700">
+            <P className="text-foreground">
               Jedes Jahr organisieren wir eine Reihe von Veranstaltungen, um
               unsere Mitglieder und die Öffentlichkeit in den Karnevalsspaß
               einzubinden. Von Kostümfesten bis hin zu Umzügen bieten wir ein
