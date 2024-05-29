@@ -1,7 +1,7 @@
 import LinkWithUnderline from "@/components/Links/LinkWithUnderline";
 import { H1 } from "@/components/typography/h1";
 import Small from "@/components/typography/small";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { env } from "@/env";
 import { db } from "@/server/db";
 import { postsTable } from "@/server/db/schema";
@@ -59,7 +59,7 @@ const AktuellesDetailsPage = async ({
           <H1>{post.title}</H1>
         </div>
         <Card className="space-y-2">
-          <CardContent className=" relative aspect-[3/2] w-full p-0 ">
+          <CardHeader className=" relative aspect-[3/2] w-full p-0 ">
             <Image
               src={`${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/article_images/${post.slug}`}
               fill
@@ -67,8 +67,8 @@ const AktuellesDetailsPage = async ({
               className="overflow-hidden rounded-t-md"
               sizes="(max-width: 1024px) 100vw, (max-width: 1920px) 50vw, 33vw"
             />
-          </CardContent>
-          <CardContent className="prose">{parse(post.content)}</CardContent>
+          </CardHeader>
+          <CardContent className="prose w-full dark:prose-invert">{parse(post.content)}</CardContent>
         </Card>
       </section>
     </main>
