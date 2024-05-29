@@ -1,7 +1,7 @@
 import CategoriesCard from "@/components/postPage/categoriesCard";
 import FallbackCard from "@/components/postPage/fallbackCard";
 import PostCard from "@/components/postPage/postCard";
-import SearchCard from "@/components/postPage/searchCard";
+// import SearchCard from "@/components/postPage/searchCard";
 import { H2 } from "@/components/typography/h2";
 import P from "@/components/typography/p";
 import { db } from "@/server/db";
@@ -37,7 +37,7 @@ const AktuellesPage = async () => {
               <Suspense fallback={<FallbackCard />}>
                 <CategoriesCard categories={categories} />
               </Suspense>
-              <SearchCard />
+              {/* <SearchCard /> */}
             </div>
           </div>
         </div>
