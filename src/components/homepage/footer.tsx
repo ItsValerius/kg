@@ -1,7 +1,7 @@
 import Link from "next/link";
 import P from "../typography/p";
 import { ModeToggle } from "../mode-toggle";
-import LoginButton from "./loginButton";
+import LoginButton from "./logInOutButton";
 import { createClient } from "@/server/supabase/server";
 
 
