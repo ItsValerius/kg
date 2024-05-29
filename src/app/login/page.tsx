@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Login",
 };
 
-export default function Login({
+export default async function Login({
   searchParams,
 }: {
   searchParams: { message: string };
@@ -57,6 +57,13 @@ export default function Login({
 
   //   return redirect("/login?message=Check email to continue sign in process");
   // };
+
+  const supabase = createClient();
+  const {data} = await supabase.auth.getUser();
+
+  if(data.user){
+    return redirect("/dashboard");
+  }
 
   return (
     <main>

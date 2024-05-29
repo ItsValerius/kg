@@ -6,20 +6,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbSeparator,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
 } from "../ui/breadcrumb";
 import { Button } from "../ui/button";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
 const DashboardTableHeader = ({
@@ -29,7 +29,6 @@ const DashboardTableHeader = ({
 }) => {
   const pathname = usePathname();
   const pathnames = pathname.split("/").filter((name) => !!name);
-
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-4 border-b bg-background px-4 py-2 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
       <Breadcrumb className="hidden md:flex">
@@ -87,7 +86,12 @@ const DashboardTableHeader = ({
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <Button variant={"ghost"} onClick={async () => await signOut()}>
+            <Button
+              variant={"ghost"}
+              onClick={async () => {
+                await signOut();
+              }}
+            >
               Logout
             </Button>
           </DropdownMenuItem>

@@ -10,7 +10,7 @@ import { useCallback } from "react";
 const CategoriesCard = ({
   categories,
 }: {
-  categories: SelectCategoryWithPosts[];
+  categories?: SelectCategoryWithPosts[];
 }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -34,7 +34,8 @@ const CategoriesCard = ({
       </CardHeader>
       <CardContent>
         <div className="mt-4 grid gap-2 ">
-          {categories.map((category) => {
+          {categories?.map((category) => {
+            if (category.categoriesToPosts.length === 0) return;
             return (
               <Link
                 className="flex items-center justify-between text-sm font-medium hover:underline"

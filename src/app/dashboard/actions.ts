@@ -10,7 +10,6 @@ import {
 import { createClient } from "@/server/supabase/server";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export const uploadImage = async (formData: FormData) => {
   const supabase = createClient();
@@ -96,8 +95,5 @@ export const updateStatus = async (
 
 export const signOut = async () => {
   const supabase = createClient();
-
   await supabase.auth.signOut();
-
-  return redirect("/login");
 };
