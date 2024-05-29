@@ -54,17 +54,17 @@ const AktuellesDetailsPage = async ({
           <Small className="sm:text-lg">Alle News</Small>
         </LinkWithUnderline>
       </div>
-      <section className="mx-auto max-w-5xl p-4">
-        <Card>
-          <CardHeader>
-            <H1>{post.title}</H1>
-          </CardHeader>
-          <CardContent className=" relative aspect-[3/2] w-full  ">
+      <section className="mx-auto max-w-3xl space-y-4 p-4 pt-0">
+        <div className="w-full text-center">
+          <H1>{post.title}</H1>
+        </div>
+        <Card className="space-y-2">
+          <CardContent className=" relative aspect-[3/2] w-full p-0 ">
             <Image
               src={`${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/article_images/${post.slug}`}
               fill
               alt="Artikel Bild"
-              className="p-4"
+              className="overflow-hidden rounded-t-md"
               sizes="(max-width: 1024px) 100vw, (max-width: 1920px) 50vw, 33vw"
             />
           </CardContent>
