@@ -1,9 +1,13 @@
 "use client";
-import { SelectAccount, insertAccountSchema } from "@/server/db/schema";
+import { updateName, uploadAvatar } from "@/app/dashboard/settings/actions";
+import { insertAccountSchema, type SelectAccount } from "@/server/db/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import ReactCrop, { type Crop } from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 import { z } from "zod";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
@@ -14,10 +18,6 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import ReactCrop, { Crop } from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
-import { updateName, uploadAvatar } from "@/app/dashboard/settings/actions";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -141,7 +141,8 @@ const DashboardFormSettings = ({ account }: { account: SelectAccount }) => {
             circularCrop
             aspect={1}
           >
-            <img src={URL.createObjectURL(file)} />
+            {/*eslint-disable-next-line @next/next/no-img-element */}
+            <img src={URL.createObjectURL(file)} alt="cropped image" />
           </ReactCrop>
         )}
         <Button type="submit">Speichern</Button>

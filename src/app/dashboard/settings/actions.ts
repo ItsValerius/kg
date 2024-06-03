@@ -2,7 +2,6 @@
 import { db } from "@/server/db";
 import { accountsTable } from "@/server/db/schema";
 import { createClient } from "@/server/supabase/server";
-import { log } from "console";
 import { eq } from "drizzle-orm";
 import sharp from "sharp";
 export const uploadAvatar = async ({

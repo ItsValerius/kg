@@ -3,6 +3,11 @@ import { db } from "@/server/db";
 import { accountsTable } from "@/server/db/schema";
 import { createClient } from "@/server/supabase/server";
 import { eq } from "drizzle-orm";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard | Settings",
+};
 
 const SettingsPage = async () => {
   const supabase = createClient();
