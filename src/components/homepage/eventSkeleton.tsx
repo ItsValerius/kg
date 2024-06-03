@@ -1,7 +1,6 @@
 import { CalendarDaysIcon, ChevronRightCircle } from "lucide-react";
 import LinkWithUnderline from "../Links/LinkWithUnderline";
 import { H2 } from "../typography/h2";
-import H3 from "../typography/h3";
 import P from "../typography/p";
 import Small from "../typography/small";
 import { Card, CardContent } from "../ui/card";
