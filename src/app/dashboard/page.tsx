@@ -1,9 +1,10 @@
-import DashboardTable from "@/components/dashboardPage/dashboardTable";
+import DashboardTableEvents from "@/components/dashboardPage/dashboardTableEvents";
+import DashboardTablePosts from "@/components/dashboardPage/dashboardTablePosts";
 import DashboardTabs from "@/components/dashboardPage/dashboardTabs";
-import { db } from "@/server/db";
 import { createClient } from "@/server/supabase/server";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -20,18 +21,19 @@ export default async function DashboardPage() {
     return redirect("/login");
   }
 
-  const posts = await db.query.postsTable.findMany({ limit: 10 });
-  const events = await db.query.eventsTable.findMany({ limit: 10 });
-
   return (
     <main>
       <div className="p-4">
         <div className="hidden md:grid md:grid-cols-2 md:gap-2">
-          <DashboardTable posts={posts} />
-          <DashboardTable events={events} />
+          <Suspense fallback={"Lade Newstabelle..."}>
+            <DashboardTablePosts />
+          </Suspense>
+          <Suspense fallback={"Lade Veranstaltungstabelle..."}>
+            <DashboardTableEvents />
+          </Suspense>
         </div>
         <div className="md:hidden">
-          <DashboardTabs posts={posts} events={events} />
+          <DashboardTabs />
         </div>
       </div>
     </main>

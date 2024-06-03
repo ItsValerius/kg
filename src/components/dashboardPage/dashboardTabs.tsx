@@ -1,15 +1,8 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import React from "react";
-import DashboardTable from "./dashboardTable";
-import { type SelectEvent, type SelectPost } from "@/server/db/schema";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import DashboardTableEvents from "./dashboardTableEvents";
+import DashboardTablePosts from "./dashboardTablePosts";
 
-const DashboardTabs = ({
-  events,
-  posts,
-}: {
-  events: SelectEvent[];
-  posts: SelectPost[];
-}) => {
+const DashboardTabs = () => {
   return (
     <Tabs defaultValue="aktuelles">
       <TabsList className="grid w-full grid-cols-2">
@@ -17,10 +10,10 @@ const DashboardTabs = ({
         <TabsTrigger value="veranstaltungen">Veranstaltungen</TabsTrigger>
       </TabsList>
       <TabsContent value="aktuelles">
-        <DashboardTable posts={posts} />
+        <DashboardTablePosts  />
       </TabsContent>
       <TabsContent value="veranstaltungen">
-        <DashboardTable events={events} />
+        <DashboardTableEvents  />
       </TabsContent>
     </Tabs>
   );
