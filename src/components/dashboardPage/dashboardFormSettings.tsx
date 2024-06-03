@@ -140,9 +140,10 @@ const DashboardFormSettings = ({ account }: { account: SelectAccount }) => {
             onChange={(c) => setCrop(c)}
             circularCrop
             aspect={1}
+            className="w-fit"
           >
             {/*eslint-disable-next-line @next/next/no-img-element */}
-            <img src={URL.createObjectURL(file)} alt="cropped image" />
+            <img src={URL.createObjectURL(file)} alt="cropped image"  />
           </ReactCrop>
         )}
         <Button type="submit">Speichern</Button>
