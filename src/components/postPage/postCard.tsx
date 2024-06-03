@@ -34,7 +34,7 @@ const PostCard = ({ post }: { post: SelectPostWithAccountAndCategory }) => {
               <div>
                 <H3>{post.title}</H3>
                 <Muted>{post.createdAt?.toLocaleDateString("de-De")}</Muted>
-                <P className="line-clamp-2 [&:not(:first-child)]:mt-1">
+                <P className="line-clamp-2 [&:not(:first-child)]:mt-1 text-card-foreground">
                   {post.teaser}
                 </P>
               </div>
