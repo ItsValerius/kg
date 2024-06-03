@@ -17,6 +17,7 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import DashboardUpdateStatus from "../dashboardUpdateStatus";
 import { DataTableColumnHeader } from "./dataTableHeader";
+import StatusBadge from "../statusBadge";
 
 export const columns: ColumnDef<SelectEvent>[] = [
   {
@@ -52,7 +53,9 @@ export const columns: ColumnDef<SelectEvent>[] = [
     id: "Beschreibung",
     cell: ({ row }) => {
       return (
-        <div className="line-clamp-3">{parse(row.getValue("Beschreibung"))}</div>
+        <div className="line-clamp-3">
+          {parse(row.getValue("Beschreibung"))}
+        </div>
       );
     },
   },
@@ -68,24 +71,13 @@ export const columns: ColumnDef<SelectEvent>[] = [
     },
     cell: ({ row }) => {
       const status = row.getValue("status") satisfies SelectEvent["status"];
-      const variant =
-        status === "draft"
-          ? "outline"
-          : status === "active"
-            ? "default"
-            : "destructive";
-      const formatted =
-        status === "draft"
-          ? "Entwurf"
-          : status === "active"
-            ? "Aktiv"
-            : "Inaktiv";
-      return <Badge variant={variant}>{formatted}</Badge>;
+
+      return <StatusBadge status={status} />;
     },
   },
   {
     accessorKey: "price",
-    id:'Preis',
+    id: "Preis",
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title="Preis" />;
     },

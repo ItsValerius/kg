@@ -17,6 +17,7 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import DashboardUpdateStatus from "../dashboardUpdateStatus";
 import { DataTableColumnHeader } from "./dataTableHeader";
+import StatusBadge from "../statusBadge";
 
 export const columns: ColumnDef<SelectPost>[] = [
   {
@@ -42,7 +43,6 @@ export const columns: ColumnDef<SelectPost>[] = [
     enableHiding: false,
   },
   {
-    id:'Titel',
     accessorKey: "title",
     header: "Titel",
   },
@@ -50,7 +50,7 @@ export const columns: ColumnDef<SelectPost>[] = [
   {
     accessorKey: "content",
     header: "Inhalt",
-    id:'Inhalt',
+    id: "Inhalt",
     cell: ({ row }) => {
       return (
         <div className="line-clamp-3">{parse(row.getValue("Inhalt"))}</div>
@@ -64,24 +64,13 @@ export const columns: ColumnDef<SelectPost>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    filterFn: (row, id, value:SelectPost["status"]) => {
-      return value.includes(row.getValue(id)) ;
+    filterFn: (row, id, value: SelectPost["status"]) => {
+      return value.includes(row.getValue(id));
     },
     cell: ({ row }) => {
       const status = row.getValue("status") satisfies SelectPost["status"];
-      const variant =
-        status === "draft"
-          ? "outline"
-          : status === "active"
-            ? "default"
-            : "destructive";
-      const formatted =
-        status === "draft"
-          ? "Entwurf"
-          : status === "active"
-            ? "Aktiv"
-            : "Inaktiv";
-      return <Badge variant={variant}>{formatted}</Badge>;
+
+      return <StatusBadge status={status} />;
     },
   },
   {

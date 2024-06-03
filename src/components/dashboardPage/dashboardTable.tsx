@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -19,7 +18,8 @@ import {
 } from "@/components/ui/table";
 import { env } from "@/env";
 import { type SelectEvent, type SelectPost } from "@/server/db/schema";
-
+import parse from "html-react-parser";
+import StatusBadge from "./statusBadge";
 
 export default function DashboardTable({
   events,
@@ -31,10 +31,7 @@ export default function DashboardTable({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{events ? "Events" : "Posts"}</CardTitle>
-        <CardDescription>
-          {events ? "Event Description" : "Posts Description"}
-        </CardDescription>
+        <CardTitle>{events ? "Veranstaltungen" : "Aktuelles"}</CardTitle>
       </CardHeader>
       <CardContent>
         <Table className="">
@@ -62,15 +59,12 @@ export default function DashboardTable({
                 <TableRow key={event.id}>
                   <TableCell className="font-medium">{event.name}</TableCell>
                   <TableCell className="max-w-32">
-                    <div
-                      className=" line-clamp-2 w-full text-balance font-medium"
-                      dangerouslySetInnerHTML={{ __html: event.description }}
-                    ></div>
+                    <div className=" line-clamp-2 w-full text-balance font-medium">
+                      {parse(event.description)}
+                    </div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline" className="capitalize">
-                      {event.status}{" "}
-                    </Badge>
+                    <StatusBadge status={event.status} />
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
                     {new Intl.NumberFormat("de-DE", {
@@ -104,15 +98,12 @@ export default function DashboardTable({
                   </TableCell>
                   <TableCell className="font-medium">{post.title}</TableCell>
                   <TableCell className="max-w-32">
-                    <div
-                      className=" line-clamp-2 w-full text-balance font-medium"
-                      dangerouslySetInnerHTML={{ __html: post.content }}
-                    ></div>
+                    <div className=" line-clamp-2 w-full text-balance font-medium">
+                      {parse(post.content)}
+                    </div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline" className="capitalize">
-                      {post.status}
-                    </Badge>
+                    <StatusBadge status={post.status} />
                   </TableCell>
 
                   <TableCell className="hidden md:table-cell">

@@ -20,7 +20,8 @@ export function DataTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0;
   const pathname = usePathname();
 
-  const searchColumn = table.getColumn("title") ? "title" : "name";
+  const searchColumn = pathname.includes('aktuelles') ? "title" : "name";
+  
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center ">

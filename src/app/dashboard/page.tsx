@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Dashboard"
+  title: "Dashboard",
 };
 
 export default async function DashboardPage() {
@@ -20,8 +20,8 @@ export default async function DashboardPage() {
     return redirect("/login");
   }
 
-  const posts = await db.query.postsTable.findMany({limit:10});
-  const events = await db.query.eventsTable.findMany({limit:10});
+  const posts = await db.query.postsTable.findMany({ limit: 10 });
+  const events = await db.query.eventsTable.findMany({ limit: 10 });
 
   return (
     <main>
