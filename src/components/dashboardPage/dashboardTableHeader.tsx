@@ -21,6 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { env } from "@/env";
 
 const DashboardTableHeader = ({
   currentAccount,
@@ -70,7 +71,13 @@ const DashboardTableHeader = ({
             size="icon"
             className="overflow-hidden rounded-full"
           >
-            <NextAvatar src={currentAccount.imageUrl ?? ""} alt="Avatar" />
+            <NextAvatar
+              src={
+                `${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/account_images/` +
+                  currentAccount.imageUrl ?? ""
+              }
+              alt="Avatar"
+            />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

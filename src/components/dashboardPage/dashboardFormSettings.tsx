@@ -1,7 +1,7 @@
 "use client";
-import { insertAccountSchema } from "@/server/db/schema";
+import { SelectAccount, insertAccountSchema } from "@/server/db/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
@@ -15,6 +15,9 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import ReactCrop, { Crop } from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import { updateName, uploadAvatar } from "@/app/dashboard/settings/actions";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -39,24 +42,52 @@ const fileSchema = z.object({
 });
 const formSchema = insertAccountSchema.merge(fileSchema);
 
-const DashboardFormSettings = ({ accountId }: { accountId: string }) => {
+const DashboardFormSettings = ({ account }: { account: SelectAccount }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: account.name,
+    },
   });
+  const [crop, setCrop] = useState<Crop>({
+    unit: "px", // Can be 'px' or '%'
+    x: 25,
+    y: 25,
+    width: 100,
+    height: 100,
+  });
+  const [file, setFile] = useState<File | undefined>();
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    console.log(crop);
+    if (values.file) {
+      const formData = new FormData();
+      formData.append("file", values.file);
+
+      await uploadAvatar({
+        x: crop.x,
+        y: crop.y,
+        h: crop.height,
+        w: crop.width,
+        accountId: values.id,
+        formData,
+      });
+    }
+    if (values.name !== account.name) {
+      await updateName({ name: values.name, accountId: values.id });
+    }
   }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={() => {
-          form.setValue("id", accountId);
-          form.handleSubmit(onSubmit);
+        onSubmit={async (e) => {
+          form.setValue("id", account.id);
+          await form.handleSubmit(onSubmit)(e);
         }}
         className="flex flex-col gap-2"
       >
@@ -89,7 +120,10 @@ const DashboardFormSettings = ({ accountId }: { accountId: string }) => {
                   type="file"
                   placeholder="Avatar"
                   {...field}
-                  onChange={(event) => onChange(event.target?.files?.[0])}
+                  onChange={(event) => {
+                    onChange(event.target?.files?.[0]);
+                    setFile(event.target?.files?.[0]);
+                  }}
                 />
               </FormControl>
               <FormDescription>
@@ -100,6 +134,16 @@ const DashboardFormSettings = ({ accountId }: { accountId: string }) => {
             </FormItem>
           )}
         />
+        {file && (
+          <ReactCrop
+            crop={crop}
+            onChange={(c) => setCrop(c)}
+            circularCrop
+            aspect={1}
+          >
+            <img src={URL.createObjectURL(file)} />
+          </ReactCrop>
+        )}
         <Button type="submit">Speichern</Button>
       </form>
     </Form>

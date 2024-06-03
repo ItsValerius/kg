@@ -42,7 +42,13 @@ const PostCard = ({ post }: { post: SelectPostWithAccountAndCategory }) => {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>
-                    <NextAvatar src={post.author.imageUrl ?? ""} alt="Avatar" />
+                      <NextAvatar
+                        src={
+                          `${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/account_images/` +
+                            post.author.imageUrl ?? ""
+                        }
+                        alt="Avatar"
+                      />
                     </TooltipTrigger>
                     <TooltipContent>
                       <Small className="">{post.author.name}</Small>
