@@ -1,10 +1,10 @@
 "use client";
 import { signOut } from "@/app/dashboard/actions";
 import type { SelectAccount } from "@/server/db/schema";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { Suspense } from "react";
+import React from "react";
+import NextAvatar from "../nextAvatar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,9 +21,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { CircleUserRound, User } from "lucide-react";
-import NextAvatar from "../nextAvatar";
 
 const DashboardTableHeader = ({
   currentAccount,

@@ -1,11 +1,10 @@
-import Link from "next/link";
-import P from "../typography/p";
-import { ModeToggle } from "../mode-toggle";
-import LoginButton from "./logInOutButton";
 import { createClient } from "@/server/supabase/server";
 import Image from "next/image";
-import { Separator } from "../ui/separator";
+import Link from "next/link";
+import { ModeToggle } from "../mode-toggle";
 import Muted from "../typography/muted";
+import { Separator } from "../ui/separator";
+import LoginButton from "./logInOutButton";
 
 const Footer = async () => {
   const supabase = createClient();

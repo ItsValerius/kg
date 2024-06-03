@@ -1,7 +1,7 @@
-import { ImageProps, getImageProps } from "next/image";
-import { omit, pick } from "lodash/fp";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { omit, pick } from "lodash/fp";
 import { User } from "lucide-react";
+import { type ImageProps, getImageProps } from "next/image";
 
 type Props = Omit<ImageProps, "fill">;
 

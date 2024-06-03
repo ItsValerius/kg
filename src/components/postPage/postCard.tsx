@@ -1,23 +1,21 @@
-import type { SelectPostWithAccountAndCategory } from "@/server/db/schema";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
-  TooltipProvider,
   Tooltip,
-  TooltipTrigger,
   TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
+import type { SelectPostWithAccountAndCategory } from "@/server/db/schema";
 import { ChevronRightCircle } from "lucide-react";
+import Image from "next/image";
 import { env } from "process";
-import React from "react";
 import LinkWithUnderline from "../Links/LinkWithUnderline";
+import NextAvatar from "../nextAvatar";
 import H3 from "../typography/h3";
 import Muted from "../typography/muted";
 import P from "../typography/p";
 import Small from "../typography/small";
-import { Card, CardContent } from "../ui/card";
-import Image from "next/image";
 import { Badge } from "../ui/badge";
-import NextAvatar from "../nextAvatar";
+import { Card, CardContent } from "../ui/card";
 
 const PostCard = ({ post }: { post: SelectPostWithAccountAndCategory }) => {
   return (
