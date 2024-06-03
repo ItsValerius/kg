@@ -131,7 +131,7 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
       <Separator className="mx-auto my-4 max-w-5xl" />
       <section className="px-2 py-6 md:px-4">
         <div className="mx-auto flex max-w-5xl justify-center">
-          <CardContent className="prose">
+          <CardContent className="prose dark:prose-invert">
             {parse(event.description)}
           </CardContent>
         </div>
