@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ModeToggle } from "../mode-toggle";
 import Muted from "../typography/muted";
 import { Separator } from "../ui/separator";
-import LoginButton from "./logInOutButton";
+import LoginButton from "./loginButton";
 
 const Footer = async () => {
   const supabase = createClient();
