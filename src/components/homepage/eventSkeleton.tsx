@@ -35,7 +35,7 @@ const EventSkeleton = () => {
                     <div className="flex items-center space-x-2">
                       <CalendarDaysIcon className="h-5 w-5 stroke-primary" />
                       <span className="text-sm">
-                        <Skeleton className="h-4 w-32  animate-pulse md:w-24" />
+                        <Skeleton className="h-4 w-32 animate-pulse md:w-24" />
                       </span>
                     </div>
                   </div>
