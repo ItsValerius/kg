@@ -6,6 +6,11 @@ import EventCard from "../eventPage/eventCard";
 import { H2 } from "../typography/h2";
 import Small from "../typography/small";
 const EventsSection = async () => {
+
+  function sleep(ms:number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  await sleep(20000);
   const events = await getActiveEvents(3);
   if (events.length < 1) {
     return;
@@ -20,7 +25,7 @@ const EventsSection = async () => {
             Erfahren Sie mehr über unsere kommenden Karnevalsfeierlichkeiten.
           </P>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 min-h-48">
           {events.map((event) => {
             return <EventCard event={event} key={event.id} />;
           })}

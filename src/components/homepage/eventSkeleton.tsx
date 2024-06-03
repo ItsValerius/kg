@@ -17,26 +17,26 @@ const EventSkeleton = () => {
             Erfahren Sie mehr über unsere kommenden Karnevalsfeierlichkeiten.
           </P>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 h-48">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {new Array(3).fill(0).map((_, i) => {
             return (
               <Card
-                className="p-4 duration-500 hover:shadow-md hover:shadow-primary/60"
+                className="h-48 p-4 duration-500 hover:shadow-md hover:shadow-primary/60"
                 key={i}
               >
-                <CardContent className="grid h-full grid-rows-[32px_1fr_20px] gap-2 space-y-2">
-                  <H3 className="text-xl font-bold">
-                    <Skeleton className="h-8 animate-pulse" />
-                  </H3>
-                  <P className="text-slate-700">
-                    <Skeleton className="h-6 animate-pulse" />
-                    <Skeleton className="h-6 animate-pulse" />
-                  </P>
+                <CardContent className="grid h-full grid-rows-[32px_1fr_20px] gap-2 ">
+                  <div>
+                    <Skeleton className="h-8 w-1/3 animate-pulse md:w-32" />
+                  </div>
+                  <div className="space-y-2">
+                    <Skeleton className="h-6 w-5/6 animate-pulse md:w-60" />
+                    <Skeleton className="h-6 w-3/4 animate-pulse md:w-56" />
+                  </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <CalendarDaysIcon className="h-5 w-5 stroke-primary" />
                       <span className="text-sm">
-                        <Skeleton className="h-4 w-32 animate-pulse" />
+                        <Skeleton className="h-4 w-32  animate-pulse md:w-24" />
                       </span>
                     </div>
                   </div>
