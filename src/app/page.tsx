@@ -7,9 +7,7 @@ import NewsSkeleton from "@/components/homepage/newsSkeleton";
 import UeberunsSection from "@/components/homepage/ueberunsSection";
 import { Suspense } from "react";
 
-export const config = {
-  maxDuration: 30,
-};
+export const maxDuration = 30;
 
 export default function Home() {
   return (
