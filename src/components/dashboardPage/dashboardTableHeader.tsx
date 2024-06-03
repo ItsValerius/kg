@@ -4,7 +4,7 @@ import type { SelectAccount } from "@/server/db/schema";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,6 +21,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { CircleUserRound, User } from "lucide-react";
+import NextAvatar from "../nextAvatar";
 
 const DashboardTableHeader = ({
   currentAccount,
@@ -70,19 +73,15 @@ const DashboardTableHeader = ({
             size="icon"
             className="overflow-hidden rounded-full"
           >
-            <Image
-              src={currentAccount.imageUrl}
-              width={36}
-              height={36}
-              alt="Avatar"
-              className="overflow-hidden rounded-full"
-            />
+            <NextAvatar src={currentAccount.imageUrl ?? ""} alt="Avatar" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard/settings">Settings</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>

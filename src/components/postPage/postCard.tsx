@@ -17,6 +17,7 @@ import Small from "../typography/small";
 import { Card, CardContent } from "../ui/card";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
+import NextAvatar from "../nextAvatar";
 
 const PostCard = ({ post }: { post: SelectPostWithAccountAndCategory }) => {
   return (
@@ -43,15 +44,7 @@ const PostCard = ({ post }: { post: SelectPostWithAccountAndCategory }) => {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>
-                      <Avatar>
-                        <AvatarImage asChild />
-                        <Image
-                          src={post.author.imageUrl}
-                          alt={post.author.name}
-                          fill
-                          sizes="128px"
-                        />
-                      </Avatar>
+                    <NextAvatar src={post.author.imageUrl ?? ""} alt="Avatar" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <Small className="">{post.author.name}</Small>

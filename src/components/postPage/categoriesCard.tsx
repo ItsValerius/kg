@@ -30,7 +30,7 @@ const CategoriesCard = ({
   return (
     <Card>
       <CardHeader>
-        <H4>Categories</H4>
+        <H4>Kategorien</H4>
       </CardHeader>
       <CardContent>
         <div className="mt-4 grid gap-2 ">

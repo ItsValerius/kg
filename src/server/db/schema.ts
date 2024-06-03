@@ -35,7 +35,7 @@ export const accountsTable = pgTable("accounts_table", {
     .primaryKey()
     .references(() => usersTable.id, { onDelete: "cascade" }),
   name: text("name").notNull(),
-  imageUrl: text("image_url").notNull(),
+  imageUrl: text("image_url"),
 });
 
 export const statusEnum = pgEnum("status", ["draft", "active", "inactive"]);

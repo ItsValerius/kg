@@ -27,7 +27,7 @@ const AktuellesPage = async () => {
             <H2>Aktuelles</H2>
             <P>Erfahren Sie aktuelles aus unserem Verein.</P>
           </div>
-          <div className="container grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
+          <div className="container grid grid-cols-1 gap-8 lg:grid-cols-[1fr_200px]">
             <div className="grid gap-8">
               {posts.map((post) => {
                 return <PostCard post={post} key={post.id} />;
