@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -16,8 +15,8 @@ import parse from "html-react-parser";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import DashboardUpdateStatus from "../dashboardUpdateStatus";
-import { DataTableColumnHeader } from "./dataTableHeader";
 import StatusBadge from "../statusBadge";
+import { DataTableColumnHeader } from "./dataTableHeader";
 
 export const columns: ColumnDef<SelectEvent>[] = [
   {

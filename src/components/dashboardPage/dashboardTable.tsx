@@ -1,9 +1,6 @@
-import Image from "next/image";
-
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -19,6 +16,7 @@ import {
 import { env } from "@/env";
 import { type SelectEvent, type SelectPost } from "@/server/db/schema";
 import parse from "html-react-parser";
+import Image from "next/image";
 import StatusBadge from "./statusBadge";
 
 export default function DashboardTable({
