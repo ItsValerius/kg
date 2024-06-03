@@ -51,7 +51,7 @@ const EventDetailPage = async ({ params }: { params: { slug: string } }) => {
       </div>
       <section className="px-4 py-12 md:px-6">
         <div className="mx-auto max-w-5xl space-y-8">
-          <H4 className="bg-gradient-to-r from-primary to-lime-200 bg-clip-text text-center text-transparent">
+          <H4 className="bg-gradient-to-r from-primary to-lime-200 dark:from-primary dark:to-background bg-clip-text text-center text-transparent">
             {new Intl.DateTimeFormat("de-DE", {
               year: "numeric",
               month: "long",
