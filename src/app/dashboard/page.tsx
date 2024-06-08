@@ -5,7 +5,7 @@ import { createClient } from "@/server/supabase/server";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-
+export const maxDuration = 30;
 export const metadata: Metadata = {
   title: "Dashboard",
 };
